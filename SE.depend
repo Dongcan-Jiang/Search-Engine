@@ -21,8 +21,9 @@
 	<string>
 	<iostream>
 
-1422537439 d:\se\analyzer\analyzer.h
+1422540202 d:\se\analyzer\analyzer.h
 	<iostream>
+	"Token.h"
 
 1422538107 d:\se\analyzer\whitespaceanalyzer.h
 	<vector>
@@ -47,7 +48,7 @@
 	<string>
 	<iostream>
 
-1422538419 d:\se\document\indexsearcher.h
+1422541169 d:\se\document\indexsearcher.h
 	<fstream>
 	<string>
 	<vector>
@@ -55,6 +56,7 @@
 	<iostream>
 	"ScoreDoc.h"
 	"../query/Query.h"
+	"IindexIfstream.h"
 
 1422534914 d:\se\document\scoredoc.h
 	<iostream>
@@ -80,4 +82,6 @@
 	<string>
 	<iostream>
 	"Query.h"
+
+1422541171 d:\se\document\iindexifstream.h
 

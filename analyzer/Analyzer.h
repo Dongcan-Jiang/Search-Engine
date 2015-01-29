@@ -2,7 +2,7 @@
 #define ANALYZER_H_INCLUDED
 #include <iostream>
 using namespace std;
-
+#include "Token.h"
 class Analyzer {
 public:
     virtual string toTerm(const string &str) = 0;

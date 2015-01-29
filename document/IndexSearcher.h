@@ -9,10 +9,11 @@
 using namespace std;
 #include "ScoreDoc.h"
 #include "../query/Query.h"
-
+#include "IindexIfstream.h"
 class IndexSearcher {
 public:
-    ifstream iindexTable,iindexTerm,iindexPostinglist,sfieldTable,sfieldText,sfieldNamelist;
+    ifstream sfieldTable,sfieldText,sfieldNamelist;
+    IindexIfstream iindexIfstream;
     IndexSearcher(const string &INDEX_DIR){}
     vector<ScoreDoc> search(shared_ptr<Query> query){}
     Document doc(int docID){}
