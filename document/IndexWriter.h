@@ -12,9 +12,10 @@ using namespace std;
 #include "Posting.h"
 class IndexWriter {
 public:
-    ofstream iindexTable,iindexTerm,iindexPostinglist,sfieldTable,sfieldText,sfieldNamelist;
-    IndexWriter(string index_dir, shared_ptr<Analyzer> analyzer){}
+    ofstream sfieldTable,sfieldText;
     map<string, vector<Posting>> invertedindex;
+    vector<string> fieldNameList;
+    IndexWriter(string index_dir, shared_ptr<Analyzer> analyzer){}
     void setStoredField(const vector<string> &fieldname){}
     void addDocument(Document doc) {}
     void close(){}
