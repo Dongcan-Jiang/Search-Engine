@@ -32,7 +32,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="analyzer/Analyzer.h" />
+		<Unit filename="analyzer/Token.h" />
+		<Unit filename="analyzer/WhitespaceAnalyzer.h" />
+		<Unit filename="document/Document.h" />
+		<Unit filename="document/IndexSearcher.h" />
+		<Unit filename="document/IndexWriter.h" />
+		<Unit filename="document/Posting.h" />
+		<Unit filename="document/ScoreDoc.h" />
+		<Unit filename="document/StoredField.h" />
+		<Unit filename="document/TextField.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="query/Query.h" />
+		<Unit filename="query/TermQuery.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

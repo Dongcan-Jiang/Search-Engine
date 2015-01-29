@@ -1,8 +1,83 @@
 # depslib dependency file v1.0
-1422511696 source:d:\se\main.cpp
-	<iostream>
+1422537961 source:d:\se\main.cpp
 	<string>
 	<vector>
-	<map>
 	<memory>
+	<iostream>
+	"analyzer/Token.h"
+	"analyzer/Analyzer.h"
+	"analyzer/WhitespaceAnalyzer.h"
+	"document/Document.h"
+	"document/IndexSearcher.h"
+	"document/IndexWriter.h"
+	"document/Posting.h"
+	"document/ScoreDoc.h"
+	"document/StoredField.h"
+	"document/TextField.h"
+	"query/Query.h"
+	"query/TermQuery.h"
+
+1422534914 d:\se\analyzer\token.h
+	<string>
+	<iostream>
+
+1422537439 d:\se\analyzer\analyzer.h
+	<iostream>
+
+1422538107 d:\se\analyzer\whitespaceanalyzer.h
+	<vector>
+	<string>
+	<iostream>
+	"Analyzer.h"
+	"Token.h"
+
+1422538419 d:\se\document\document.h
+	<memory>
+	<map>
+	<string>
+	<iostream>
+	"TextField.h"
+	"StoredField.h"
+
+1422534914 d:\se\document\textfield.h
+	<string>
+	<iostream>
+
+1422538450 d:\se\document\storedfield.h
+	<string>
+	<iostream>
+
+1422538419 d:\se\document\indexsearcher.h
+	<fstream>
+	<string>
+	<vector>
+	<memory>
+	<iostream>
+	"ScoreDoc.h"
+	"../query/Query.h"
+
+1422534914 d:\se\document\scoredoc.h
+	<iostream>
+
+1422535723 d:\se\query\query.h
+	<iostream>
+
+1422538419 d:\se\document\indexwriter.h
+	<fstream>
+	<string>
+	<memory>
+	<map>
+	<vector>
+	<iostream>
+	"../analyzer/Analyzer.h"
+	"Posting.h"
+
+1422538450 d:\se\document\posting.h
+	<vector>
+	<iostream>
+
+1422535492 d:\se\query\termquery.h
+	<string>
+	<iostream>
+	"Query.h"
 
