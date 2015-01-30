@@ -5,49 +5,52 @@
 #include <algorithm>
 class InvertedIndex {
 public:
-    unordered_map<string, vector<Posting>> invertedindex;
-    vector<string> order;
-    void addDocTokens(int docID, vector<Token> tokens);
-    void mapOrder() {
-        for(auto &p : invertedindex) {
+    unordered_map<string, vector<Posting>> invertedIndex;
+    void addDocTokens(int docID, const vector<Token> &tokens) {
+        for (auto &token : tokens) {
+            auto iter = invertedIndex.find(token.term);
+            if(iter == invertedIndex.end()) {
+                Posting posting (docID, {token.position});
+                invertedIndex[token.term] = {posting};
+            }
+            else {
+                vector<Posting> &postingList = iter->second;
+                if(postingList.back().docID != docID) {
+                    Posting posting (docID, {token.position});
+                    postingList.push_back(posting);
+                }
+                else {
+                    postingList.back().position.push_back(token.position);
+                }
+            }
+        }
+    }
+
+    vector<string> mapOrder() {
+        vector<string> order;
+        for(auto &p : invertedIndex) {
             order.push_back(p.first);
         }
         sort(order.begin(), order.end());
+        return order;
     }
-    string toString();
+    string toString() {
+        string s;
+        vector<string> order = mapOrder();
+        for(auto &o : order) {
+            s += o;
+            s += ":";
+            for (auto &posting : invertedIndex[o]) {
+                s += posting.toString();
+                s += " ";
+            }
+            s += "\n";
+        }
+        return s;
+    }
     void save() {}
 };
 
-void InvertedIndex::addDocTokens(int docID, vector<Token> tokens) {
-    for (auto &token : tokens) {
-        auto iter = invertedindex.find(token.term);
-        if(iter == invertedindex.end()) {
-            Posting posting (docID, vector<int>{token.position});
-            vector<Posting> postingList = {posting};
-            invertedindex.insert(pair<string,vector<Posting>>(token.term, postingList));
-        }
-        else {
-            vector<Posting> postingList = invertedindex[token.term];
-            if(postingList.back().docID != docID) {
-                Posting posting (docID, vector<int>{token.position});
-                postingList.push_back(posting);
-            }
-            else {
-                postingList.back().position.push_back(token.position);
-            }
-        }
-    }
-}
 
-string InvertedIndex::toString() {
-    string s;
-    for(auto &o : order) {
-        s += o;
-        s += ":";
-        for (auto &posting : invertedindex[o])
-            s += posting.toString();
-        s += "\n";
-    }
-    return s;
-}
+
 #endif // INVERTEDINDEX_H_INCLUDED

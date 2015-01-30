@@ -14,7 +14,7 @@ public:
     }
     string toString() {
         string s = "<"+to_string(docID)+"("+to_string(position.size())+")"+": ";
-        for (size_t i = 0; i < position.size()-1; i++) {
+        for (size_t i = 0; i+1 < position.size(); i++) {
             s += to_string(position[i]);
             s += ", ";
         }

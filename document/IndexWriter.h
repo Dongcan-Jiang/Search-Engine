@@ -26,7 +26,7 @@ public:
     }
     void setStoredField(const vector<string> &fieldname){
     }
-    void addDocument(Document doc) {
+    void addDocument(const Document &doc) {
         iindex.addDocTokens(nextDocID, analyzer->toTokens(doc.textField->text));
         nextDocID++;
     }

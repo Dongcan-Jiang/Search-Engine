@@ -10,7 +10,6 @@ using namespace std;
 
 class WhitespaceAnalyzer : public Analyzer   {
 public:
-
     vector<Token> toTokens(const string &text) {
         vector<Token> tokens;
         size_t start = 0;

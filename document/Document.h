@@ -12,10 +12,10 @@ using namespace std;
 class Document {
 public:
     shared_ptr<TextField> textField;
-    map<string, shared_ptr<StoredField>>storedfield;
+    map<string, shared_ptr<StoredField>>storedField;
     void setTextField(shared_ptr<TextField> textf) {textField = textf;}
     void addStoredField(shared_ptr<StoredField> storedf) {
-        storedfield.insert(pair<string, shared_ptr<StoredField>>(storedf->fieldName, storedf));
+        storedField[storedf->fieldName] = storedf;
     }
     shared_ptr<StoredField> getStoredField(const string &fieldName) {return {};}
 };
