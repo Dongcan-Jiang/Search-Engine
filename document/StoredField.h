@@ -8,7 +8,10 @@ class StoredField {
 public:
     string fieldName;
     string stored;
-    StoredField(const string &name, const string &s) {}
+    StoredField(const string &fieldName, const string &stored) {
+        this->fieldName = fieldName;
+        this->stored = stored;
+    }
     string stringValue() {return stored;}
 };
 

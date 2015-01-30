@@ -5,14 +5,14 @@
 #include <iostream>
 using namespace std;
 class Token {
+public:
     string token;
     int position;
     string term;
-public:
-    Token(string token, int position, string term){
-        this->token.assign(token);
+    Token(const string &token, int position, const string &term){
+        this->token = token;
         this->position = position;
-        this->term.assign(term);
+        this->term = term ;
     }
     string toString(){
         string s = "(";
