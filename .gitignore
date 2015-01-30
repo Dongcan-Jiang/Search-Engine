@@ -4,3 +4,4 @@ main
 *.d
 *.out
 *.depend
+*.layout
