@@ -36,6 +36,7 @@
 		<Unit filename="analyzer/Token.h" />
 		<Unit filename="analyzer/WhitespaceAnalyzer.h" />
 		<Unit filename="document/Document.h" />
+		<Unit filename="document/IindexIfstream.h" />
 		<Unit filename="document/IndexSearcher.h" />
 		<Unit filename="document/IndexWriter.h" />
 		<Unit filename="document/Posting.h" />
