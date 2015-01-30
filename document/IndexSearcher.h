@@ -15,8 +15,8 @@ public:
     ifstream sfieldTable,sfieldText,sfieldNamelist;
     IindexIfstream iindexIfstream;
     IndexSearcher(const string &INDEX_DIR){}
-    vector<ScoreDoc> search(shared_ptr<Query> query){}
-    Document doc(int docID){}
+    vector<ScoreDoc> search(shared_ptr<Query> query){return{};}
+    Document doc(int docID){return {};}
     void close(){}
 };
 

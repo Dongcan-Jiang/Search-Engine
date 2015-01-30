@@ -13,9 +13,17 @@ public:
 
     vector<Token> toTokens(const string &text) {
         vector<Token> tokens;
-        int start = 0;
-        int position = 0;
-        for (int i = 0; i < text.size(); i++) {
+        size_t start = 0;
+        size_t position = 0;
+        for (size_t i = 0; i < text.size(); i++) {
+            if (i == text.size()-1 && !isspace(text[i])) {
+                string token = text.substr(start, i-start+1);
+                string term = toTerm(token);
+                Token t(token,position,term);
+                position++;
+                tokens.push_back(t);
+                break;
+            }
             if (isspace(text[i])) {
                 if (i!=start) {
                     string token = text.substr(start, i-start);
@@ -32,7 +40,7 @@ public:
 
     string toTerm(const string &str) {
         string term = str;
-        for (int i = 0; i< str.size(); i++)
+        for (size_t i = 0; i< str.size(); i++)
             term[i] = tolower(str[i]);
         return term;
     }

@@ -15,7 +15,7 @@ public:
     map<string, shared_ptr<StoredField>>storedfield;
     void setTextField(shared_ptr<TextField> textf) {textField = textf;}
     void addStoredField(shared_ptr<StoredField> storedf) {}
-    shared_ptr<StoredField> getStoredField(const string &fieldName) {}
+    shared_ptr<StoredField> getStoredField(const string &fieldName) {return {};}
 };
 
 #endif // DOCUMENT_H_INCLUDED

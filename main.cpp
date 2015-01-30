@@ -46,8 +46,8 @@ void searchitem(const string & INDEX_DIR, const vector<vector<string>> &dataset,
 int main() {
     WhitespaceAnalyzer test;
     vector<Token> tokens;
-    tokens = test.toTokens("faKKka  dalkfadjlfkj   fdajlkfjad   fadjlFWEad  ");
-    for (int i = 0; i< tokens.size(); i++)
+    tokens = test.toTokens("a b c");
+    for (size_t i = 0; i< tokens.size(); i++)
         cout << tokens[i].toString()<< "+";
 
 }
