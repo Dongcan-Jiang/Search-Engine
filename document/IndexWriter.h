@@ -21,4 +21,6 @@ public:
     void close(){}
 };
 
+//IndexWiter:
+
 #endif // INDEXWRITER_H_INCLUDED

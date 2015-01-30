@@ -15,16 +15,8 @@ public:
         vector<Token> tokens;
         size_t start = 0;
         size_t position = 0;
-        for (size_t i = 0; i < text.size(); i++) {
-            if (i == text.size()-1 && !isspace(text[i])) {
-                string token = text.substr(start, i-start+1);
-                string term = toTerm(token);
-                Token t(token,position,term);
-                position++;
-                tokens.push_back(t);
-                break;
-            }
-            if (isspace(text[i])) {
+        for (size_t i = 0; i <= text.size(); i++) {
+            if (i == text.size() || isspace(text[i])) {
                 if (i!=start) {
                     string token = text.substr(start, i-start);
                     string term = toTerm(token);
