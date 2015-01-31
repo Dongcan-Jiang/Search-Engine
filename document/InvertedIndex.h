@@ -3,9 +3,11 @@
 
 #include <unordered_map>
 #include <algorithm>
+
 class InvertedIndex {
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
+
     void addDocTokens(int docID, const vector<Token> &tokens) {
         for (auto &token : tokens) {
             auto iter = invertedIndex.find(token.term);

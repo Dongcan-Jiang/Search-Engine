@@ -23,7 +23,6 @@ public:
         this->indexDir = indexDir;
         this->analyzer = analyzer;
         nextDocID = 0;
-
         //sfieldTable.open("../"+indexDir+"/"+"");
     }
     void setStoredField(const vector<string> &fieldname){

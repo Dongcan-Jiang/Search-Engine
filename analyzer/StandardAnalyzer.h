@@ -8,7 +8,7 @@ public:
         size_t start = 0;
         size_t position = 0;
         for (size_t i = 0; i <= text.size(); i++) {
-            if (i == text.size() || isspace(text[i]) || ispunct(text[i])) {
+            if (i == text.size() || !isalnum(text[i]) || (i>=1 && ((isdigit(text[i])&&isalpha(text[i-1]))||(isdigit(text[i-1])&&isalpha(text[i]))))) {
                 if (i != start) {
                     string token = text.substr(start, i-start);
                     string term = toTerm(token);
@@ -16,15 +16,10 @@ public:
                     position++;
                     tokens.push_back(t);
                 }
-                start = i+1;
-            }
-            if (i<text.size()-1 && ((isdigit(text[i])&&isalpha(text[i+1]))||(isdigit(text[i+1])&&isalpha(text[i])))) {
-                string token = text.substr(start, i+1-start);
-                string term = toTerm(token);
-                Token t(token,position,term);
-                position++;
-                tokens.push_back(t);
-                start = i+1;
+                if(i == text.size() || !isalnum(text[i]))
+                    start = i+1;
+                else
+                    start = i;
             }
         }
         return tokens;

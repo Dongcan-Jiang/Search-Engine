@@ -18,8 +18,8 @@ public:
             s += to_string(position[i]);
             s += ", ";
         }
-
-        s += to_string(position.back());
+        if(position.size() != 0)
+            s += to_string(position.back());
         s += ">";
         return s;
     }
