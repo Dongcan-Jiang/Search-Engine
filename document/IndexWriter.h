@@ -23,8 +23,11 @@ public:
         this->indexDir = indexDir;
         this->analyzer = analyzer;
         nextDocID = 0;
+
+        //sfieldTable.open("../"+indexDir+"/"+"");
     }
     void setStoredField(const vector<string> &fieldname){
+        this->fieldNameList = fieldname;
     }
     void addDocument(const Document &doc) {
         iindex.addDocTokens(nextDocID, analyzer->toTokens(doc.textField->text));

@@ -10,6 +10,7 @@ using namespace std;
 #include "../analyzer/Token.h"
 #include "../analyzer/Analyzer.h"
 #include "../analyzer/WhitespaceAnalyzer.h"
+#include "../analyzer/StandardAnalyzer.h"
 #include "../document/Document.h"
 #include "../document/IndexSearcher.h"
 #include "../document/IndexWriter.h"

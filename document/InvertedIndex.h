@@ -12,14 +12,12 @@ public:
             if(iter == invertedIndex.end()) {
                 Posting posting (docID, {token.position});
                 invertedIndex[token.term] = {posting};
-            }
-            else {
+            }else {
                 vector<Posting> &postingList = iter->second;
                 if(postingList.back().docID != docID) {
                     Posting posting (docID, {token.position});
                     postingList.push_back(posting);
-                }
-                else {
+                }else {
                     postingList.back().position.push_back(token.position);
                 }
             }

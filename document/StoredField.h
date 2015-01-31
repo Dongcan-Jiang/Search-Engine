@@ -12,6 +12,9 @@ public:
         this->fieldName = fieldName;
         this->stored = stored;
     }
+    string toString() {
+        return fieldName + ": " + "\"" + stored + "\"";
+    }
     string stringValue() {return stored;}
 };
 

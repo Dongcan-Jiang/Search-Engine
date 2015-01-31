@@ -39,6 +39,7 @@
 		<Unit filename="document/IindexIfstream.h" />
 		<Unit filename="document/IndexSearcher.h" />
 		<Unit filename="document/IndexWriter.h" />
+		<Unit filename="document/InvertedIndex.h" />
 		<Unit filename="document/Posting.h" />
 		<Unit filename="document/ScoreDoc.h" />
 		<Unit filename="document/StoredField.h" />
@@ -46,6 +47,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="query/Query.h" />
 		<Unit filename="query/TermQuery.h" />
+		<Unit filename="test/simpleTest.cpp" />
+		<Unit filename="test/test.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

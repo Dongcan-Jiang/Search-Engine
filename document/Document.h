@@ -17,6 +17,15 @@ public:
     void addStoredField(shared_ptr<StoredField> storedf) {
         storedField[storedf->fieldName] = storedf;
     }
+    string toString() {
+        string s = "< ";
+        for (auto &iter : storedField) {
+            s += iter.second->toString();
+            s += ", ";
+        }
+        s += ">";
+        return s;
+    }
     shared_ptr<StoredField> getStoredField(const string &fieldName) {return {};}
 };
 

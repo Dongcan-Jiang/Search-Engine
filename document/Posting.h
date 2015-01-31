@@ -18,6 +18,7 @@ public:
             s += to_string(position[i]);
             s += ", ";
         }
+
         s += to_string(position.back());
         s += ">";
         return s;
