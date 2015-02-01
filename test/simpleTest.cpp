@@ -26,7 +26,7 @@ void simpleTestSearchitem(const string & INDEX_DIR, const vector<vector<string>>
 }
 
 void simpleTest() {
-    const string INDEX_DIR = "index";
+    const string INDEX_DIR = "index/";
     vector<vector<string>> dataset = {
         {"doc1", "a b c d e f g a"},
         {"doc2", "x a e c d"},

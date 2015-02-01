@@ -1,0 +1,109 @@
+diff --git a/document/IndexSearcher.h b/document/IndexSearcher.h
+index 8fd2890..3394592 100644
+--- a/document/IndexSearcher.h
++++ b/document/IndexSearcher.h
+@@ -13,7 +13,7 @@ using namespace std;
+ class IndexSearcher {
+ public:
+     ifstream sfieldTable,sfieldText,sfieldNamelist;
+-    IindexIfstream iindexFstream;
++    IindexIfstream iindexIfstream;
+     IndexSearcher(const string &INDEX_DIR){}
+     vector<ScoreDoc> search(shared_ptr<Query> query){return{};}
+     Document doc(int docID){return {};}
+diff --git a/document/IndexWriter.h b/document/IndexWriter.h
+index f32b486..0388042 100644
+--- a/document/IndexWriter.h
++++ b/document/IndexWriter.h
+@@ -13,7 +13,7 @@ using namespace std;
+ 
+ class IndexWriter {
+ public:
+-    ofstream sfieldTable,sfieldText;
++    ofstream sfTable,sfText;
+     string indexDir;
+     shared_ptr<Analyzer> analyzer;
+     vector<string> fieldNameList;
+@@ -23,17 +23,31 @@ public:
+         this->indexDir = indexDir;
+         this->analyzer = analyzer;
+         nextDocID = 0;
+-        //sfieldTable.open("../"+indexDir+"/"+"");
++        sfTable.open("../"+indexDir+"/"+"storedfieldtable", ios::binary);
++        sfText.open("../"+indexDir+"/"+"storedfieldtext", ios::binary);
+     }
+     void setStoredField(const vector<string> &fieldname){
+         this->fieldNameList = fieldname;
+     }
+     void addDocument(const Document &doc) {
+         iindex.addDocTokens(nextDocID, analyzer->toTokens(doc.textField->text));
++        string s;
++        if(nextDocID == 0) {
++            int i = 0;
++            sfTable.write((char*)&i, sizeof(int));
++        }
++        for(auto & name : fieldNameList) {
++            s = doc.storedField[name]->stored;
++            sfText.write(s.c_str(),s.size()+1);
++        }
++        int t = sfText.tellp();
++        sfTable.write((char*)&t, sizeof(int));
+         nextDocID++;
+     }
+     void close(){
+         //cout << iindex.toString();
++        sfTable.close();
++        sfText.close();
+         iindex.save(indexDir);
+     }
+ };
+diff --git a/document/InvertedIndex.h b/document/InvertedIndex.h
+index 65405bb..687badf 100644
+--- a/document/InvertedIndex.h
++++ b/document/InvertedIndex.h
+@@ -49,12 +49,20 @@ public:
+     }
+     void save(const string & indexDir) {
+         ofstream indexTable,indexTerm,indexPostinglist;
+-        indexTable.open("../"+indexDir+"/"+"indextable", ios::binary);
+-        indexTerm.open("../"+indexDir+"/"+"indexterm", ios::binary);
+-        indexPostinglist.open("../"+indexDir+"/"+"indexpostinglist", ios::binary);
++        indexTable.open(indexDir+"indextable", ios::binary);
++        indexTerm.open(indexDir+"indexterm", ios::binary);
++        indexPostinglist.open(indexDir+"indexpostinglist", ios::binary);
+         vector<string> order = mapOrder();
++        int i = 0;
++        indexTable.write((char*)&i, sizeof(int));
++        indexTable.write((char*)&i, sizeof(int));
+         for (auto &o : order) {
++            int df = (int)invertedIndex[o].size();
++            indexTable.write((char*)&df, sizeof(int));
++
+             indexTerm.write(o.c_str(), o.size()+1);
++            //string s = "";
++            //indexPostinglist.write(s.c_str(), s.size()+1);
+             int t = indexTerm.tellp();
+             indexTable.write((char*)&t, sizeof(int));
+ 
+@@ -71,8 +79,6 @@ public:
+             t = indexPostinglist.tellp();
+             indexTable.write((char*)&t, sizeof(int));
+ 
+-            int df = (int)invertedIndex[o].size();
+-            indexTable.write((char*)&df, sizeof(int));
+         }
+         indexPostinglist.close();
+         indexTerm.close();
+diff --git a/test/simpleTest.cpp b/test/simpleTest.cpp
+index 79df1cd..13b29a1 100644
+--- a/test/simpleTest.cpp
++++ b/test/simpleTest.cpp
+@@ -26,7 +26,7 @@ void simpleTestSearchitem(const string & INDEX_DIR, const vector<vector<string>>
+ }
+ 
+ void simpleTest() {
+-    const string INDEX_DIR = "index";
++    const string INDEX_DIR = "index/";
+     vector<vector<string>> dataset = {
+         {"doc1", "a b c d e f g a"},
+         {"doc2", "x a e c d"},

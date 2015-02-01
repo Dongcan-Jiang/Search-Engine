@@ -13,7 +13,7 @@ using namespace std;
 class IndexSearcher {
 public:
     ifstream sfieldTable,sfieldText,sfieldNamelist;
-    IindexIfstream iindexFstream;
+    IindexIfstream iindexIfstream;
     IndexSearcher(const string &INDEX_DIR){}
     vector<ScoreDoc> search(shared_ptr<Query> query){return{};}
     Document doc(int docID){return {};}
