@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="analyzer/Analyzer.h" />
+		<Unit filename="analyzer/StandardAnalyzer.h" />
 		<Unit filename="analyzer/Token.h" />
 		<Unit filename="analyzer/WhitespaceAnalyzer.h" />
 		<Unit filename="document/Document.h" />

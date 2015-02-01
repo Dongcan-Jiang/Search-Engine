@@ -7,7 +7,6 @@
 class InvertedIndex {
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
-
     void addDocTokens(int docID, const vector<Token> &tokens) {
         for (auto &token : tokens) {
             auto iter = invertedIndex.find(token.term);
@@ -48,7 +47,37 @@ public:
         }
         return s;
     }
-    void save() {}
+    void save(const string & indexDir) {
+        ofstream indexTable,indexTerm,indexPostinglist;
+        indexTable.open("../"+indexDir+"/"+"indextable", ios::binary);
+        indexTerm.open("../"+indexDir+"/"+"indexterm", ios::binary);
+        indexPostinglist.open("../"+indexDir+"/"+"indexpostinglist", ios::binary);
+        vector<string> order = mapOrder();
+        for (auto &o : order) {
+            indexTerm.write(o.c_str(), o.size()+1);
+            int t = indexTerm.tellp();
+            indexTable.write((char*)&t, sizeof(int));
+
+            int size = 0;
+            for (auto &posting : invertedIndex[o]) {
+                indexPostinglist.write((char*) &posting.docID, sizeof(int));
+                size = (int)posting.position.size();
+                indexPostinglist.write((char*) &size, sizeof(int));
+                for (size_t i = 0; i < posting.position.size(); i++)
+                    indexPostinglist.write((char*) &posting.position[i], sizeof(int));
+            }
+            string s = "";
+            indexPostinglist.write(s.c_str(), s.size()+1);
+            t = indexPostinglist.tellp();
+            indexTable.write((char*)&t, sizeof(int));
+
+            int df = (int)invertedIndex[o].size();
+            indexTable.write((char*)&df, sizeof(int));
+        }
+        indexPostinglist.close();
+        indexTerm.close();
+        indexTable.close();
+    }
 };
 
 

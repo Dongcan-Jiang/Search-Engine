@@ -33,7 +33,8 @@ public:
         nextDocID++;
     }
     void close(){
-        cout << iindex.toString();
+        //cout << iindex.toString();
+        iindex.save(indexDir);
     }
 };
 
