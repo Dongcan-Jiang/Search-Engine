@@ -23,8 +23,8 @@ public:
         this->indexDir = indexDir;
         this->analyzer = analyzer;
         nextDocID = 0;
-        sfTable.open(indexDir+"storedfieldtable", ios::binary);
-        sfText.open(indexDir+"storedfieldtext", ios::binary);
+        sfTable.open(indexDir+"/"+"storedfieldtable", ios::binary);
+        sfText.open(indexDir+"/"+"storedfieldtext", ios::binary);
     }
     void setStoredField(const vector<string> &fieldname){
         this->fieldNameList = fieldname;

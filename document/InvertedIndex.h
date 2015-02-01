@@ -49,9 +49,9 @@ public:
     }
     void save(const string & indexDir) {
         ofstream indexTable,indexTerm,indexPostinglist;
-        indexTable.open(indexDir+"indextable", ios::binary);
-        indexTerm.open(indexDir+"indexterm", ios::binary);
-        indexPostinglist.open(indexDir+"indexpostinglist", ios::binary);
+        indexTable.open(indexDir+"/"+"indextable", ios::binary);
+        indexTerm.open(indexDir+"/"+"indexterm", ios::binary);
+        indexPostinglist.open(indexDir+"/"+"indexpostinglist", ios::binary);
         assert(indexTable);
         assert(indexTerm);
         assert(indexPostinglist);
