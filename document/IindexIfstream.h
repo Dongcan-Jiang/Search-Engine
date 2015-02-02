@@ -8,6 +8,7 @@ class IindexIfstream {
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
     const int rowLength = sizeof(int)*3;
+    int termnum;
     IindexIfstream(const string &indexDir) {
         iindexTable.open(indexDir+"/"+"indextable", ios::binary);
         assert(iindexTable);
@@ -15,9 +16,8 @@ public:
         assert(iindexTerm);
         iindexPostinglist.open(indexDir+"/"+"indexpostinglist", ios::binary);
         assert(iindexPostinglist);
-    }
-    int termNum() {
-        return iindexTable.seekg(0,ios::end).tellg()/rowLength;
+
+        termnum = iindexTable.seekg(0,ios::end).tellg()/rowLength;
     }
 
     string getTerm(int termID) {
@@ -41,12 +41,11 @@ public:
         return df;
     }
     string toString(int termID) {
-        Posting p;
         string s;
         iindexPostinglist.seekg(getPostinglistBegin(termID));
         int df = getDF(termID);
-        for (int i = 0; i<df; i++) {
-            p.readFrom(iindexPostinglist);
+        for (int i = 0; i < df; i++) {
+            Posting p(iindexPostinglist);
             s += p.toString();
             s += " ";
         }
@@ -54,7 +53,7 @@ public:
     }
     string toString() {
         string s;
-        for (int i = 0; i < termNum(); i++) {
+        for (int i = 0; i < termnum; i++) {
             s += getTerm(i);
             s += ":";
             s += toString(i);

@@ -69,7 +69,7 @@ public:
             }
 
 
-            int df = (int)invertedIndex[o].size();
+            int df = invertedIndex[o].size();
             indexTable.write((char*)&df, sizeof(df));
         }
         indexPostinglist.close();

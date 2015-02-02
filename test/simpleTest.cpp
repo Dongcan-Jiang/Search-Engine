@@ -32,12 +32,11 @@ void simpleTest() {
     const string INDEX_DIR = "index/";
     vector<vector<string>> dataset = {
         {"doc1", "a b a"},
-        {"doc2", "x a e"}
-        //,
-        //{"doc3", "l x y t"},
-        //{"doc4", "k b r d w"},
-        //{"doc5", "u t w x a"},
-        //{"doc6", "m t a"}
+        {"doc2", "x a e"},
+        {"doc3", "l x y t"},
+        {"doc4", "k b r d w"},
+        {"doc5", "u t w x a"},
+        {"doc6", "m t a"}
     };
     //simpleTestIndex(INDEX_DIR, dataset);
     simpleTestSearchitem(INDEX_DIR, dataset, "a");
