@@ -33,7 +33,7 @@ public:
         iindex.addDocTokens(nextDocID, analyzer->toTokens(doc.textField->text));
         string s;
         int t = sfText.tellp();
-        sfTable.write((char*)&t, sizeof(int));
+        sfTable.write((char*)&t, sizeof(t));
         for(auto & name : fieldNameList) {
             s = doc.storedField.find(name)->second->stored;
             sfText.write(s.c_str(),s.size()+1);
@@ -41,10 +41,12 @@ public:
         nextDocID++;
     }
     void close(){
-        //cout << iindex.toString();
+        cout << iindex.toString();
+
         sfTable.close();
         sfText.close();
         iindex.save(indexDir);
+
     }
 };
 

@@ -8,6 +8,7 @@ class Posting {
 public:
     int docID;
     vector<int> position;
+    Posting() {}
     Posting(int docID, const vector<int> &position) {
         this->docID = docID;
         this->position = position;
@@ -19,6 +20,16 @@ public:
         out.write((char*) &size, sizeof(size));
         for (size_t i = 0; i < position.size(); i++)
             out.write((char*) &position[i], sizeof(position[i]));
+    }
+    void readFrom(istream& in) {
+        in.read((char*)&docID, sizeof(docID));
+        int n;
+        in.read((char*)&n, sizeof(n));
+        int p;
+        for (int i = 0; i< n; i++) {
+            in.read((char*)&p, sizeof(p));
+            position.push_back(p);
+        }
     }
     string toString() {
         string s = "<"+to_string(docID)+"("+to_string(position.size())+")"+": ";

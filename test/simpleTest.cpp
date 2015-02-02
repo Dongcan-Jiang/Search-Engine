@@ -16,25 +16,29 @@ void simpleTestIndex(const string & INDEX_DIR, const vector<vector<string>> &dat
 
 void simpleTestSearchitem(const string & INDEX_DIR, const vector<vector<string>> &dataset, const string &item) {
     IndexSearcher is(INDEX_DIR);
+
+    /*
     shared_ptr<Query> query = make_shared<TermQuery>(item);
     vector<ScoreDoc> docs = is.search(query);
     for (auto &sd : docs) {
         Document doc = is.doc(sd.doc);
         cout << doc.getStoredField("title")->stringValue() <<endl;
     }
+    */
     is.close();
 }
 
 void simpleTest() {
     const string INDEX_DIR = "index/";
     vector<vector<string>> dataset = {
-        {"doc1", "a b c d e f g a"},
-        {"doc2", "x a e c d"},
-        {"doc3", "l x y t"},
-        {"doc4", "k b r d w"},
-        {"doc5", "u t w x a"},
-        {"doc6", "m t a"}
+        {"doc1", "a b a"},
+        {"doc2", "x a e"}
+        //,
+        //{"doc3", "l x y t"},
+        //{"doc4", "k b r d w"},
+        //{"doc5", "u t w x a"},
+        //{"doc6", "m t a"}
     };
-    simpleTestIndex(INDEX_DIR, dataset);
-    //simpleTestSearchitem(INDEX_DIR, dataset, "a");
+    //simpleTestIndex(INDEX_DIR, dataset);
+    simpleTestSearchitem(INDEX_DIR, dataset, "a");
 }

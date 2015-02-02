@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <cassert>
+#include "Posting.h"
 class InvertedIndex {
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
@@ -58,16 +59,15 @@ public:
         vector<string> order = mapOrder();
         for (auto &o : order) {
             int t = indexTerm.tellp();
-            indexTable.write((char*)&t, sizeof(int));
+            indexTable.write((char*)&t, sizeof(t));
             indexTerm.write(o.c_str(), o.size()+1);
 
             t = indexPostinglist.tellp();
-            indexTable.write((char*)&t, sizeof(int));
+            indexTable.write((char*)&t, sizeof(t));
             for (auto &posting : invertedIndex[o]) {
                 posting.writeTo(indexPostinglist);
             }
-            string s = "";
-            indexPostinglist.write(s.c_str(), s.size()+1);
+
 
             int df = (int)invertedIndex[o].size();
             indexTable.write((char*)&df, sizeof(df));
