@@ -44,6 +44,7 @@
 		<Unit filename="document/Posting.h" />
 		<Unit filename="document/ScoreDoc.h" />
 		<Unit filename="document/StoredField.h" />
+		<Unit filename="document/StoredIfstream.h" />
 		<Unit filename="document/TextField.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="query/Query.h" />

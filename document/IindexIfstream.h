@@ -7,8 +7,8 @@
 class IindexIfstream {
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
-    const int rowLength = sizeof(int)*3;
-    int termnum;
+    const int ROW_LENGTH = sizeof(int)*3;
+    int TERM_NUM;
     IindexIfstream(const string &indexDir) {
         iindexTable.open(indexDir+"/"+"indextable", ios::binary);
         assert(iindexTable);
@@ -17,19 +17,19 @@ public:
         iindexPostinglist.open(indexDir+"/"+"indexpostinglist", ios::binary);
         assert(iindexPostinglist);
 
-        termnum = iindexTable.seekg(0,ios::end).tellg()/rowLength;
+        TERM_NUM = iindexTable.seekg(0,ios::end).tellg()/ROW_LENGTH;
     }
 
     string getTerm(int termID) {
         int address;
         string term;
-        iindexTable.seekg(rowLength*termID).read((char*)&address,sizeof(address));
+        iindexTable.seekg(ROW_LENGTH*termID).read((char*)&address,sizeof(address));
         getline(iindexTerm.seekg(address),term,'\0');
         return term;
     }
     int getPostinglistBegin(int termID) {
         int address;
-        iindexTable.seekg(rowLength*termID+sizeof(int)).read((char*)&address,sizeof(address));
+        iindexTable.seekg(ROW_LENGTH*termID+sizeof(int)).read((char*)&address,sizeof(address));
         return address;
 
         //getline(iindexPostinglist.seekg(address),postingList,'\0');
@@ -37,7 +37,7 @@ public:
     }
     int getDF(int termID) {
         int df;
-        iindexTable.seekg(rowLength*termID+2*sizeof(int)).read((char*)&df,sizeof(df));
+        iindexTable.seekg(ROW_LENGTH*termID+2*sizeof(int)).read((char*)&df,sizeof(df));
         return df;
     }
     string toString(int termID) {
@@ -53,7 +53,7 @@ public:
     }
     string toString() {
         string s;
-        for (int i = 0; i < termnum; i++) {
+        for (int i = 0; i < TERM_NUM; i++) {
             s += getTerm(i);
             s += ":";
             s += toString(i);
@@ -61,6 +61,8 @@ public:
         }
         return s;
     }
+
+    //fetchTermID(const string &term){}
 };
 
 #endif // IINDEXIFSTREAM_H_INCLUDED

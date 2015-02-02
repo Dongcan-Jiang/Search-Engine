@@ -23,9 +23,8 @@ public:
         }
     }
     void writeTo(ostream& out){
-        int size = 0;
         out.write((char*) &docID, sizeof(docID));
-        size = (int)position.size();
+        int size = position.size();
         out.write((char*) &size, sizeof(size));
         for (size_t i = 0; i < position.size(); i++)
             out.write((char*) &position[i], sizeof(position[i]));

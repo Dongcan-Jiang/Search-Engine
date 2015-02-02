@@ -26,7 +26,7 @@ public:
         s += ">";
         return s;
     }
-    shared_ptr<StoredField> getStoredField(const string &fieldName) {return {};}
+    shared_ptr<StoredField> getStoredField(const string &fieldName) {return storedField[fieldName];}
 };
 
 #endif // DOCUMENT_H_INCLUDED

@@ -14,7 +14,7 @@ void simpleTestIndex(const string & INDEX_DIR, const vector<vector<string>> &dat
     iw.close();
 }
 
-void simpleTestSearchitem(const string & INDEX_DIR, const vector<vector<string>> &dataset, const string &item) {
+void simpleTestSearchitem(const string & INDEX_DIR, const string &item) {
     IndexSearcher is(INDEX_DIR);
 
     /*
@@ -39,5 +39,5 @@ void simpleTest() {
         {"doc6", "m t a"}
     };
     //simpleTestIndex(INDEX_DIR, dataset);
-    simpleTestSearchitem(INDEX_DIR, dataset, "a");
+    simpleTestSearchitem(INDEX_DIR, "a");
 }
