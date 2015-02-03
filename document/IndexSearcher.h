@@ -21,9 +21,9 @@ public:
     }
     vector<ScoreDoc> search(shared_ptr<Query> query){return{};}
     Document doc(int docID){
-        cout << iindexIfstream.fetchTermID("w");
+        cout << iindexIfstream.fetchTermID("c");
         //cout << storedIfstream.toString();
-        return {};
+        return storedIfstream.doc(docID);
     }
     void close(){
         storedIfstream.close();

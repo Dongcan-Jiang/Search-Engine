@@ -72,14 +72,14 @@ public:
         int high = TERM_NUM-1;
         int mid;
         string s;
-        while (high > low) {
+        while (high >= low) {
             mid = (low+high)/2;
             s = getTerm(mid);
             if (s > term)
-                high = mid;
+                high = mid - 1;
             else {
                 if (s < term)
-                    low = mid;
+                    low = mid + 1;
                 else
                     return mid;
             }
