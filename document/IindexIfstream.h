@@ -66,11 +66,27 @@ public:
         iindexTerm.close();
         iindexPostinglist.close();
     }
-    /*
+
     int fetchTermID(const string &term) {
-        int ID = T
+        int low = 0;
+        int high = TERM_NUM-1;
+        int mid;
+        string s;
+        while (high > low) {
+            mid = (low+high)/2;
+            s = getTerm(mid);
+            if (s > term)
+                high = mid;
+            else {
+                if (s < term)
+                    low = mid;
+                else
+                    return mid;
+            }
+        }
+        return -1;
     }
-    */
+
 };
 
 #endif // IINDEXIFSTREAM_H_INCLUDED
