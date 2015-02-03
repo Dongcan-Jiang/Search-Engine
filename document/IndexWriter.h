@@ -35,8 +35,13 @@ public:
         int t = sfText.tellp();
         sfTable.write((char*)&t, sizeof(t));
         for(auto & name : fieldNameList) {
-            s = doc.storedField.find(name)->second->stored;
-            sfText.write(s.c_str(),s.size()+1);
+            auto iter = doc.storedField.find(name);
+            if (iter != doc.storedField.end()) {
+                s = iter->second->stored;
+                sfText.write(s.c_str(),s.size()+1);
+            }
+            else
+                sfText.put('\0');
         }
         nextDocID++;
     }

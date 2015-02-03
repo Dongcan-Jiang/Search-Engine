@@ -7,7 +7,7 @@
 class IindexIfstream {
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
-    const int ROW_LENGTH = sizeof(int)*3;
+    static const int ROW_LENGTH = sizeof(int)*3;
     int TERM_NUM;
     IindexIfstream(const string &indexDir) {
         iindexTable.open(indexDir+"/"+"indextable", ios::binary);
@@ -61,8 +61,16 @@ public:
         }
         return s;
     }
-
-    //fetchTermID(const string &term){}
+    void close() {
+        iindexTable.close();
+        iindexTerm.close();
+        iindexPostinglist.close();
+    }
+    /*
+    int fetchTermID(const string &term) {
+        int ID = T
+    }
+    */
 };
 
 #endif // IINDEXIFSTREAM_H_INCLUDED

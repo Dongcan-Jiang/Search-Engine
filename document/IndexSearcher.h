@@ -15,18 +15,18 @@ class IndexSearcher {
 public:
     string indexDir;
     StoredIfstream storedIfstream;
-    IndexSearcher(const string &indexDir):storedIfstream(indexDir){
+    IindexIfstream iindexIfstream;
+    IndexSearcher(const string &indexDir):storedIfstream(indexDir),iindexIfstream(indexDir){
         this->indexDir = indexDir;
     }
     vector<ScoreDoc> search(shared_ptr<Query> query){return{};}
     Document doc(int docID){
+        cout << storedIfstream.toString();
         return {};
     }
     void close(){
-        IindexIfstream iindexIfstream(indexDir);
-        //cout << iindexIfstream.termNum();
-        //cout << iindexIfstream.toString();
-        cout << storedIfstream.toString(1);
+        storedIfstream.close();
+        iindexIfstream.close();
     }
 };
 
