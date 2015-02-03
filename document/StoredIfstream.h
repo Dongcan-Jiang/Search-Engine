@@ -45,8 +45,10 @@ public:
     }
     string toString() {
         string s;
-        for(int i = 0; i < DOC_NUM; i++)
+        for(int i = 0; i < DOC_NUM; i++) {
             s += toString(i);
+            s += "\n";
+        }
         return s;
     }
     void close() {
