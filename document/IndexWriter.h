@@ -12,6 +12,7 @@ using namespace std;
 #include "InvertedIndex.h"
 
 class IndexWriter {
+
 public:
     ofstream sfTable,sfText;
     string indexDir;
@@ -19,6 +20,7 @@ public:
     vector<string> fieldNameList;
     int nextDocID;
     InvertedIndex iindex;
+
     IndexWriter(const string &indexDir, shared_ptr<Analyzer> analyzer){
         this->indexDir = indexDir;
         this->analyzer = analyzer;
@@ -26,9 +28,11 @@ public:
         sfTable.open(indexDir+"/"+"storedfieldtable", ios::binary);
         sfText.open(indexDir+"/"+"storedfieldtext", ios::binary);
     }
+
     void setStoredField(const vector<string> &fieldname){
         this->fieldNameList = fieldname;
     }
+
     void addDocument(const Document &doc) {
         iindex.addDocTokens(nextDocID, analyzer->toTokens(doc.textField->text));
         string s;
@@ -45,6 +49,7 @@ public:
         }
         nextDocID++;
     }
+
     void close(){
         ofstream sfNameList(indexDir+"/"+"storedfieldnamelist", ios::binary);
         for (auto &o : fieldNameList)
@@ -54,8 +59,7 @@ public:
         sfText.close();
         iindex.save(indexDir);
     }
-};
 
-//IndexWiter:
+};
 
 #endif // INDEXWRITER_H_INCLUDED

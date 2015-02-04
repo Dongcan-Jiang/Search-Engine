@@ -5,9 +5,12 @@
 #include <algorithm>
 #include <cassert>
 #include "Posting.h"
+
 class InvertedIndex {
+
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
+
     void addDocTokens(int docID, const vector<Token> &tokens) {
         for (auto &token : tokens) {
             auto iter = invertedIndex.find(token.term);
@@ -34,6 +37,7 @@ public:
         sort(order.begin(), order.end());
         return order;
     }
+
     string toString() {
         string s;
         vector<string> order = mapOrder();
@@ -48,6 +52,7 @@ public:
         }
         return s;
     }
+
     void save(const string & indexDir) {
         ofstream indexTable,indexTerm,indexPostinglist;
         indexTable.open(indexDir+"/"+"indextable", ios::binary);
@@ -76,8 +81,7 @@ public:
         indexTerm.close();
         indexTable.close();
     }
+
 };
-
-
 
 #endif // INVERTEDINDEX_H_INCLUDED

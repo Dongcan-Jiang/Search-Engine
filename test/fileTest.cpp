@@ -1,19 +1,24 @@
 #include "test.h"
 
-
-void readFromFile(IndexWriter &iw, const string &filename) {
-    ifstream fin(filename,ios::binary);
+string readText(const string &path) {
+    ifstream fin(path, ios::binary);
     int length = fin.seekg(0,ios::end).tellg();
     char s[length+1];
     fin.seekg(0,ios::beg);
     fin.read(s,length);
     s[length] = '\0';
-    Document doc;
     string text(s);
+    fin.close();
+    return text;
+}
+
+void readFromFile(IndexWriter &iw, const string &path) {
+    Document doc;
+    string text = readText(path);
     shared_ptr<TextField> textField = make_shared<TextField>(text);
-    int t = filename.rfind('/')+1;
-    shared_ptr<StoredField> titleField = make_shared<StoredField>("title", filename.substr(t,filename.size()-t));
-    shared_ptr<StoredField> pathField = make_shared<StoredField>("path", filename);
+    int t = path.rfind('/')+1;
+    shared_ptr<StoredField> titleField = make_shared<StoredField>("title", path.substr(t,path.size()-t));
+    shared_ptr<StoredField> pathField = make_shared<StoredField>("path", path);
     /*
     int f = text.find(' ');
     shared_ptr<StoredField> firstWordField = make_shared<StoredField>("firstword",text.substr(0,f));
@@ -23,16 +28,14 @@ void readFromFile(IndexWriter &iw, const string &filename) {
     doc.addStoredField(pathField);
     //doc.addStoredField(firstWordField);
     iw.addDocument(doc);
-    fin.close();
 }
-
 
 void fileTestIndex(const string & INDEX_DIR, const string & FILE_PATH) {
     IndexWriter iw(INDEX_DIR, make_shared<WhitespaceAnalyzer>());
     iw.setStoredField(vector<string>{"title", "path"});
 
-    fs::traverse(FILE_PATH, [&iw](const string & filename){
-        readFromFile(iw, filename);
+    fs::traverse(FILE_PATH, [&iw](const string & path){
+        readFromFile(iw, path);
     });
 
     iw.close();

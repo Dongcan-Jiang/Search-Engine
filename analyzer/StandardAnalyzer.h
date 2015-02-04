@@ -2,6 +2,7 @@
 #define STANDARDANALYZER_H_INCLUDED
 
 class StandardAnalyzer : public Analyzer   {
+
 public:
     vector<Token> toTokens(const string &text) {
         vector<Token> tokens;
@@ -31,7 +32,6 @@ public:
             term[i] = tolower(str[i]);
         return term;
     }
-
 
 };
 

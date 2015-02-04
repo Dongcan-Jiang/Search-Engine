@@ -23,5 +23,7 @@ using namespace std;
 #include "../util/fs.h"
 
 void simpleTest();
+
 void fileTest();
+
 #endif // TEST_H_INCLUDED

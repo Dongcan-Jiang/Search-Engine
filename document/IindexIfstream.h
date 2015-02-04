@@ -4,11 +4,14 @@
 #include <stdlib.h>
 #include <cassert>
 #include "Posting.h"
+
 class IindexIfstream {
+
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
     static const int ROW_LENGTH = sizeof(int)*3;
     int TERM_NUM;
+
     IindexIfstream(const string &indexDir) {
         iindexTable.open(indexDir+"/"+"indextable", ios::binary);
         assert(iindexTable);
@@ -27,6 +30,7 @@ public:
         getline(iindexTerm.seekg(address),term,'\0');
         return term;
     }
+
     int getPostinglistBegin(int termID) {
         int address;
         iindexTable.seekg(ROW_LENGTH*termID+sizeof(int)).read((char*)&address,sizeof(address));
@@ -35,11 +39,13 @@ public:
         //getline(iindexPostinglist.seekg(address),postingList,'\0');
         //return postingList;
     }
+
     int getDF(int termID) {
         int df;
         iindexTable.seekg(ROW_LENGTH*termID+2*sizeof(int)).read((char*)&df,sizeof(df));
         return df;
     }
+
     string toString(int termID) {
         string s;
         iindexPostinglist.seekg(getPostinglistBegin(termID));
@@ -51,6 +57,7 @@ public:
         }
         return s;
     }
+
     string toString() {
         string s;
         for (int i = 0; i < TERM_NUM; i++) {
@@ -61,6 +68,7 @@ public:
         }
         return s;
     }
+
     void close() {
         iindexTable.close();
         iindexTerm.close();

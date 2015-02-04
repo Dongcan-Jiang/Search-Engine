@@ -1,12 +1,15 @@
 #ifndef STOREDIFSTREAM_H_INCLUDED
 #define STOREDIFSTREAM_H_INCLUDED
 #include "Document.h"
+
 class StoredIfstream {
+
 public:
     ifstream sfieldTable,sfieldText;
     vector<string> fieldName;
     static const int ROW_LENGTH = sizeof(int);
     int DOC_NUM;
+
     StoredIfstream(const string &indexDir) {
         sfieldTable.open(indexDir+"/"+"storedfieldtable", ios::binary);
         assert(sfieldTable);
@@ -24,11 +27,13 @@ public:
 
         DOC_NUM = sfieldTable.seekg(0,ios::end).tellg()/ROW_LENGTH;
     }
+
     int getDocBegin(int docID) {
         int address;
         sfieldTable.seekg(ROW_LENGTH*docID).read((char*)&address,sizeof(address));
         return address;
     }
+
     Document doc(int docID) {
         Document d;
         sfieldText.seekg(getDocBegin(docID));
@@ -40,9 +45,11 @@ public:
         }
         return d;
     }
+
     string toString(int docID) {
         return doc(docID).toString();
     }
+
     string toString() {
         string s;
         for(int i = 0; i < DOC_NUM; i++) {
@@ -51,10 +58,12 @@ public:
         }
         return s;
     }
+
     void close() {
         sfieldTable.close();
         sfieldText.close();
     }
+
 };
 
 #endif // STOREDIFSTREAM_H_INCLUDED

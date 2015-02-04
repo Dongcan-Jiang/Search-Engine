@@ -4,14 +4,18 @@
 #include <vector>
 #include <iostream>
 using namespace std;
+
 class Posting {
+
 public:
     int docID;
     vector<int> position;
+
     Posting(int docID, const vector<int> &position) {
         this->docID = docID;
         this->position = position;
     }
+
     Posting(istream& in) {
         in.read((char*)&docID, sizeof(docID));
         int n;
@@ -22,6 +26,7 @@ public:
             position.push_back(p);
         }
     }
+
     void writeTo(ostream& out){
         out.write((char*) &docID, sizeof(docID));
         int size = position.size();
@@ -41,7 +46,6 @@ public:
         s += ">";
         return s;
     }
-
 
 };
 
