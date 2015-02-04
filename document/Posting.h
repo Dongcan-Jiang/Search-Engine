@@ -6,7 +6,6 @@
 using namespace std;
 
 class Posting {
-
 public:
     int docID;
     vector<int> position;

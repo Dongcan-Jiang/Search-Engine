@@ -7,7 +7,6 @@
 #include "Posting.h"
 
 class InvertedIndex {
-
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
 

@@ -12,7 +12,6 @@ using namespace std;
 #include "InvertedIndex.h"
 
 class IndexWriter {
-
 public:
     ofstream sfTable,sfText;
     string indexDir;

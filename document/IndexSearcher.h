@@ -13,7 +13,6 @@ using namespace std;
 #include "StoredIfstream.h"
 
 class IndexSearcher {
-
 public:
     string indexDir;
     StoredIfstream storedIfstream;

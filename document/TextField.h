@@ -6,7 +6,6 @@
 using namespace std;
 
 class TextField {
-
 public:
     string text;
 

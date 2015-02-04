@@ -2,7 +2,6 @@
 #define STANDARDANALYZER_H_INCLUDED
 
 class StandardAnalyzer : public Analyzer   {
-
 public:
     vector<Token> toTokens(const string &text) {
         vector<Token> tokens;

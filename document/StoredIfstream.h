@@ -3,7 +3,6 @@
 #include "Document.h"
 
 class StoredIfstream {
-
 public:
     ifstream sfieldTable,sfieldText;
     vector<string> fieldName;

@@ -9,7 +9,6 @@ using namespace std;
 #include "Token.h"
 
 class WhitespaceAnalyzer : public Analyzer   {
-
 public:
     vector<Token> toTokens(const string &text) {
         vector<Token> tokens;

@@ -7,7 +7,6 @@ using namespace std;
 #include "Query.h"
 
 class TermQuery: public Query{
-
 public:
     TermQuery(const string &item){}
 

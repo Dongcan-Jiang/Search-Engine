@@ -5,7 +5,6 @@
 #include <iostream>
 using namespace std;
 class StoredField {
-
 public:
     string fieldName;
     string stored;

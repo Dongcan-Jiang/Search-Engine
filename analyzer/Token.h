@@ -6,7 +6,6 @@
 using namespace std;
 
 class Token {
-
 public:
     string token;
     int position;

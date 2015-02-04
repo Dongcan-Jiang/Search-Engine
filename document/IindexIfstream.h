@@ -6,7 +6,6 @@
 #include "Posting.h"
 
 class IindexIfstream {
-
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
     static const int ROW_LENGTH = sizeof(int)*3;

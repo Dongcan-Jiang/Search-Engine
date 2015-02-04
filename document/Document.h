@@ -10,7 +10,6 @@ using namespace std;
 #include "StoredField.h"
 
 class Document {
-
 public:
     shared_ptr<TextField> textField;
     map<string, shared_ptr<StoredField>>storedField;
