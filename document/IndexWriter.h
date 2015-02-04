@@ -46,8 +46,6 @@ public:
         nextDocID++;
     }
     void close(){
-        //cout << iindex.toString();
-
         ofstream sfNameList(indexDir+"/"+"storedfieldnamelist", ios::binary);
         for (auto &o : fieldNameList)
             sfNameList.write(o.c_str(), o.size()+1);
@@ -55,7 +53,6 @@ public:
         sfTable.close();
         sfText.close();
         iindex.save(indexDir);
-
     }
 };
 

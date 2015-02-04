@@ -8,6 +8,6 @@ int main() {
     for (size_t i = 0; i< tokens.size(); i++)
         cout << tokens[i].toString()<< "+";
     */
-    simpleTest();
+    fileTest();
     return 0;
 }

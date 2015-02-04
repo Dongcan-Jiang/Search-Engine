@@ -49,8 +49,11 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="query/Query.h" />
 		<Unit filename="query/TermQuery.h" />
+		<Unit filename="test/fileTest.cpp" />
 		<Unit filename="test/simpleTest.cpp" />
 		<Unit filename="test/test.h" />
+		<Unit filename="util/fs.cpp" />
+		<Unit filename="util/fs.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

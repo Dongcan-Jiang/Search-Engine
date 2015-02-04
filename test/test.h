@@ -20,8 +20,8 @@ using namespace std;
 #include "../document/TextField.h"
 #include "../query/Query.h"
 #include "../query/TermQuery.h"
-
+#include "../util/fs.h"
 
 void simpleTest();
-
+void fileTest();
 #endif // TEST_H_INCLUDED
