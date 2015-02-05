@@ -3,6 +3,7 @@
 
 class Scorer {
 public:
+    static const int DOC_EXHAUSTED = INT_MAX;
     virtual int doc() = 0;
     virtual int score() = 0;
     virtual int next() = 0;
