@@ -8,7 +8,7 @@
 class IindexIfstream {
 public:
     ifstream iindexTable,iindexTerm,iindexPostinglist;
-    static const int ROW_LENGTH = sizeof(int)*3;
+    static const int ROW_LENGTH = sizeof(int)*4;
     int TERM_NUM;
 
     IindexIfstream(const string &indexDir) {

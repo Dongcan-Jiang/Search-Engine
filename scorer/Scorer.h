@@ -7,6 +7,7 @@ public:
     virtual int score() = 0;
     virtual int next() = 0;
     virtual int advance(int doc) = 0;
+    virtual int cost() = 0;
     virtual ~Scorer() {}
 
 };

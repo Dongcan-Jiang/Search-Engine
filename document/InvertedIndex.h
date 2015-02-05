@@ -6,6 +6,10 @@
 #include <cassert>
 #include "Posting.h"
 
+/***************************************************************
+ * | termBegin | postingListBegin | df | postingListEnd |
+ ***************************************************************/
+
 class InvertedIndex {
 public:
     unordered_map<string, vector<Posting>> invertedIndex;
@@ -72,9 +76,11 @@ public:
                 posting.writeTo(indexPostinglist);
             }
 
-
             int df = invertedIndex[o].size();
             indexTable.write((char*)&df, sizeof(df));
+
+            t = indexPostinglist.tellp();
+            indexTable.write((char*)&t, sizeof(t));
         }
         indexPostinglist.close();
         indexTerm.close();
