@@ -6,6 +6,7 @@ using namespace std;
 
 class Query {
 public:
+    virtual shared_ptr<Scorer> getScorer(IndexSearcher &is) = 0;
     virtual ~Query() {}
 
 };
