@@ -9,18 +9,19 @@ public:
         return b->doc() < a->doc();
     };
 
-    DisjunctionScorer(vector<shared_ptr<Scorer>> & scorers) {
+    DisjunctionScorer(vector<shared_ptr<Scorer>> & sv) {
         assert(scorers.size() > 1);
-        this->scorers = scorers;
+        for(auto s : sv){
+            if(s->next() < DOC_EXHAUSTED)
+                scorers.push_back(s);
+        }
+        make_heap(scorers.begin(), scorers.end(), greaterDocID);
         scost = 0;
         for(auto s : scorers) {
             scost += s->cost();
         }
-        for(auto s : scorers)
-            s->next();
-        make_heap(scorers.begin(), scorers.end(), greaterDocID);
     }
-    int score() {}
+    int score() {return{};}
     int next() {
         int minID;
         if(scorers.size() == 0)

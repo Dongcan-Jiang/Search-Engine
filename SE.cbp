@@ -50,6 +50,7 @@
 		<Unit filename="query/Query.h" />
 		<Unit filename="query/TermQuery.h" />
 		<Unit filename="scorer/ConjunctionScorer.h" />
+		<Unit filename="scorer/DisjunctionScorer.h" />
 		<Unit filename="scorer/Scorer.h" />
 		<Unit filename="scorer/TermScorer.h" />
 		<Unit filename="test/fileTest.cpp" />

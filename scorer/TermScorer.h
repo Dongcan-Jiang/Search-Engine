@@ -14,7 +14,7 @@ public:
         scost = df;
     }
 
-    int score() {}
+    int score() {return{};}
     int next() {
         if(offset < begin) {
             offset = begin;

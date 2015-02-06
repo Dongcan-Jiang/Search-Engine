@@ -15,7 +15,7 @@ public:
         );
         scost = scorers[0]->cost();
     }
-    int score() {}
+    int score() {return{};}
     int next() {
         auto iter = scorers[0];
         iter->next();
