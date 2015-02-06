@@ -15,19 +15,16 @@ public:
         );
         scost = scorers[0]->cost();
     }
-    int doc() {
-        return docID;
-    }
     int score() {}
     int next() {
         auto iter = scorers[0];
-        size_t i = 1;
         iter->next();
         while(iter->doc() < DOC_EXHAUSTED) {
             int docid = iter->doc();
+            size_t i;
             for(i = 1; i < scorers.size(); i++) {
-                if(scorers[i]->doc() != docid){
-                    if(scorers[i]->advance(docid) != docid)
+                if(scorers[i]->doc() < docid){
+                    if(scorers[i]->advance(docid) > docid)
                         break;
                 }
             }

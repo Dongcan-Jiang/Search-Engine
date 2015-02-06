@@ -13,9 +13,7 @@ public:
         offset = -1;
         scost = df;
     }
-    int doc() {
-        return docID;
-    }
+
     int score() {}
     int next() {
         if(offset < begin) {

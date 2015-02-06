@@ -6,7 +6,9 @@ public:
     static const int DOC_EXHAUSTED = INT_MAX;
     int docID = -1;
     int scost;
-    virtual int doc() = 0;
+    int doc() {
+        return docID;
+    }
     virtual int score() = 0;
     virtual int next() = 0;
     int advance(int doc) {
