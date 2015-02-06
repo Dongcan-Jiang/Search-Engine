@@ -4,7 +4,8 @@
 class Scorer {
 public:
     static const int DOC_EXHAUSTED = INT_MAX;
-    int docID;
+    int docID = -1;
+    int scost;
     virtual int doc() = 0;
     virtual int score() = 0;
     virtual int next() = 0;

@@ -22,6 +22,7 @@ using namespace std;
 #include "../query/TermQuery.h"
 #include "../scorer/Scorer.h"
 #include "../scorer/TermScorer.h"
+#include "../scorer/ConjunctionScorer.h"
 #include "../util/fs.h"
 
 void simpleTest();
