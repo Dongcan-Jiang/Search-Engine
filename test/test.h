@@ -23,6 +23,7 @@ using namespace std;
 #include "../scorer/Scorer.h"
 #include "../scorer/TermScorer.h"
 #include "../scorer/ConjunctionScorer.h"
+#include "../scorer/DisjunctionScorer.h"
 #include "../util/fs.h"
 
 void simpleTest();
