@@ -49,6 +49,9 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="query/Query.h" />
 		<Unit filename="query/TermQuery.h" />
+		<Unit filename="scorer/ConjunctionScorer.h" />
+		<Unit filename="scorer/Scorer.h" />
+		<Unit filename="scorer/TermScorer.h" />
 		<Unit filename="test/fileTest.cpp" />
 		<Unit filename="test/simpleTest.cpp" />
 		<Unit filename="test/test.h" />
