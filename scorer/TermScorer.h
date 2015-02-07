@@ -1,6 +1,8 @@
 #ifndef TERMSCORER_H_INCLUDED
 #define TERMSCORER_H_INCLUDED
 
+#include "Scorer.h"
+
 class TermScorer: public Scorer{
 public:
     ifstream &in;

@@ -6,6 +6,9 @@ using namespace std;
 class ScoreDoc {
 public:
     int doc;
+    ScoreDoc(int docID) {
+        doc = docID;
+    }
 
 };
 

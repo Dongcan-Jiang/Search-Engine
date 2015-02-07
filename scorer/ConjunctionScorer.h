@@ -2,6 +2,8 @@
 #define CONJUNCTIONSCORER_H_INCLUDED
 #include <algorithm>
 
+#include "Scorer.h"
+
 class ConjunctionScorer: public Scorer{
 public:
     vector<shared_ptr<Scorer>> scorers;

@@ -9,5 +9,6 @@ int main() {
         cout << tokens[i].toString()<< "+";
     */
     fileTest();
+    //simpleTest();
     return 0;
 }

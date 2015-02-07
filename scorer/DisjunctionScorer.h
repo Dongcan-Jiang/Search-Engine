@@ -1,6 +1,7 @@
 #ifndef DISJUNCTIONSCORER_H_INCLUDED
 #define DISJUNCTIONSCORER_H_INCLUDED
 
+#include "Scorer.h"
 
 class DisjunctionScorer: public Scorer{
 public:

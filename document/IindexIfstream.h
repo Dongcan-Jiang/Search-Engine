@@ -26,6 +26,10 @@ public:
         int address;
         string term;
         iindexTable.seekg(ROW_LENGTH*termID).read((char*)&address,sizeof(address));
+
+        //test
+        cout<<iindexTerm.seekg(address).get()<<"+";
+
         getline(iindexTerm.seekg(address),term,'\0');
         return term;
     }
@@ -34,15 +38,18 @@ public:
         int address;
         iindexTable.seekg(ROW_LENGTH*termID+sizeof(int)).read((char*)&address,sizeof(address));
         return address;
-
-        //getline(iindexPostinglist.seekg(address),postingList,'\0');
-        //return postingList;
     }
 
     int getDF(int termID) {
         int df;
         iindexTable.seekg(ROW_LENGTH*termID+2*sizeof(int)).read((char*)&df,sizeof(df));
         return df;
+    }
+
+    int getPostinglistEnd(int termID) {
+        int address;
+        iindexTable.seekg(ROW_LENGTH*termID+3*sizeof(int)).read((char*)&address,sizeof(address));
+        return address;
     }
 
     string toString(int termID) {
@@ -82,6 +89,10 @@ public:
         while (high >= low) {
             mid = (low+high)/2;
             s = getTerm(mid);
+
+            //test
+            cout<<"high: "<<high<<" low: "<<low<<" midterm: "<<s<<"size of s: "<<s.size()<<endl;
+
             if (s > term)
                 high = mid - 1;
             else {

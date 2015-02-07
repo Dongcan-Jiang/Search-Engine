@@ -43,19 +43,13 @@ void fileTestIndex(const string & INDEX_DIR, const string & FILE_PATH) {
 
 void fileTestSearchitem(const string & INDEX_DIR, const string &item) {
     IndexSearcher is(INDEX_DIR);
-
-    /*
     shared_ptr<Query> query = make_shared<TermQuery>(item);
     vector<ScoreDoc> docs = is.search(query);
+
     for (auto &sd : docs) {
         Document doc = is.doc(sd.doc);
         cout << doc.getStoredField("title")->stringValue() <<endl;
     }
-    */
-
-    //just for test. the parameter is meaningless
-    is.doc(1);
-
     is.close();
 }
 
@@ -63,5 +57,5 @@ void fileTest() {
     const string INDEX_DIR = "index/";
     const string FILE_PATH = "shakespeare/input";
     //fileTestIndex(INDEX_DIR,FILE_PATH);
-    fileTestSearchitem(INDEX_DIR, "a");
+    fileTestSearchitem(INDEX_DIR, "zodiac");
 }
