@@ -26,8 +26,6 @@ public:
     vector<ScoreDoc> search(shared_ptr<Query> query){
         shared_ptr<Scorer> sc = query->getScorer(*this);
         vector<ScoreDoc> sds;
-        if(sc->doc() == Scorer::DOC_EXHAUSTED)
-            return sds;
         while(sc->next() < Scorer::DOC_EXHAUSTED) {
             ScoreDoc sd(sc->doc());
             sds.push_back(sd);

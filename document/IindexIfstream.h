@@ -26,10 +26,6 @@ public:
         int address;
         string term;
         iindexTable.seekg(ROW_LENGTH*termID).read((char*)&address,sizeof(address));
-
-        //test
-        cout<<iindexTerm.seekg(address).get()<<"+";
-
         getline(iindexTerm.seekg(address),term,'\0');
         return term;
     }
@@ -89,10 +85,6 @@ public:
         while (high >= low) {
             mid = (low+high)/2;
             s = getTerm(mid);
-
-            //test
-            cout<<"high: "<<high<<" low: "<<low<<" midterm: "<<s<<"size of s: "<<s.size()<<endl;
-
             if (s > term)
                 high = mid - 1;
             else {

@@ -50,6 +50,7 @@ void fileTestSearchitem(const string & INDEX_DIR, const string &item) {
         Document doc = is.doc(sd.doc);
         cout << doc.getStoredField("title")->stringValue() <<endl;
     }
+
     is.close();
 }
 
@@ -57,5 +58,5 @@ void fileTest() {
     const string INDEX_DIR = "index/";
     const string FILE_PATH = "shakespeare/input";
     //fileTestIndex(INDEX_DIR,FILE_PATH);
-    fileTestSearchitem(INDEX_DIR, "zodiac");
+    fileTestSearchitem(INDEX_DIR, "gowns,");
 }

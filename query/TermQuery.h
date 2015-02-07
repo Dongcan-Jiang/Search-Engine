@@ -18,8 +18,7 @@ public:
         ifstream &fin = is.iindexIfstream.iindexPostinglist;
         int termID = is.iindexIfstream.fetchTermID(term);
         if(termID == -1) {
-            shared_ptr<TermScorer> ts = make_shared<TermScorer>(fin, 0, 0, 0);
-            ts->docID = Scorer::DOC_EXHAUSTED;
+            return make_shared<TermScorer>(fin, 0, 0, 0);
         }
         int begin = is.iindexIfstream.getPostinglistBegin(termID);
         int end = is.iindexIfstream.getPostinglistEnd(termID);

@@ -20,6 +20,8 @@ public:
     int next() {
         if(offset < begin) {
             offset = begin;
+            if(offset >= end)
+                return docID = DOC_EXHAUSTED;
             in.seekg(offset).read((char*)&docID, sizeof(int));
         }
         else{
