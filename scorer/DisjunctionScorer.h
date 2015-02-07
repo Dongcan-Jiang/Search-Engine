@@ -10,8 +10,8 @@ public:
         return b->doc() < a->doc();
     };
 
-    DisjunctionScorer(vector<shared_ptr<Scorer>> & sv) {
-        assert(scorers.size() > 1);
+    DisjunctionScorer(const vector<shared_ptr<Scorer>> & sv) {
+        assert(sv.size() > 1);
         for(auto s : sv){
             if(s->next() < DOC_EXHAUSTED)
                 scorers.push_back(s);

@@ -43,7 +43,17 @@ void fileTestIndex(const string & INDEX_DIR, const string & FILE_PATH) {
 
 void fileTestSearchitem(const string & INDEX_DIR, const string &item) {
     IndexSearcher is(INDEX_DIR);
-    shared_ptr<Query> query = make_shared<TermQuery>(item);
+
+    //TermQuery
+    //shared_ptr<Query> query = make_shared<TermQuery>(item);
+
+    //BooleanQuery
+    shared_ptr<Query> q1 = make_shared<TermQuery>("gratis.");
+    shared_ptr<Query> q2 = make_shared<TermQuery>("gratis;");
+    shared_ptr<BooleanQuery> query = make_shared<BooleanQuery>();
+    query->add(BooleanQuery::SHOULD,q1);
+    query->add(BooleanQuery::SHOULD,q2);
+
     vector<ScoreDoc> docs = is.search(query);
 
     for (auto &sd : docs) {

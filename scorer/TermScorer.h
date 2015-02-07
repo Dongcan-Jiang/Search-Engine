@@ -17,6 +17,7 @@ public:
     }
 
     int score() {return{};}
+
     int next() {
         if(offset < begin) {
             offset = begin;
@@ -40,6 +41,7 @@ public:
     int cost() {
         return scost;
     }
+
     ~TermScorer() {}
 
 };
