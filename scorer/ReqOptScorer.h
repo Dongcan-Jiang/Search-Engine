@@ -19,13 +19,11 @@ public:
     int next() {
         docID = req->next();
         docScore = req->score();
-        if(opt->doc()==docID || opt->advance(docID)== docID)
-            docScore += opt->score();
+        if(opt->doc() <= docID){
+            if(opt->doc()==docID || opt->advance(docID)== docID)
+                docScore += opt->score();
+        }
         return docID ;
-    }
-
-    int cost() {
-        return scost;
     }
 
     ~ReqOptScorer() {}

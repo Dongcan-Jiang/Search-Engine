@@ -43,9 +43,6 @@ public:
         return docID = minID;
     }
 
-    int cost() {
-        return scost;
-    }
     ~DisjunctionScorer() {}
 
 };

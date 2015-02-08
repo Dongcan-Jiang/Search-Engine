@@ -39,10 +39,6 @@ public:
         return docID;
     }
 
-    int cost() {
-        return scost;
-    }
-
     ~TermScorer() {}
 
 };

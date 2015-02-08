@@ -47,7 +47,7 @@ void fileTestSearchitem(const string & INDEX_DIR, shared_ptr<Query> query) {
 
     for (auto &sd : docs) {
         Document doc = is.doc(sd.doc);
-        cout << doc.getStoredField("title")->stringValue() <<endl;
+        cout << sd.doc << " : " << doc.getStoredField("title")->stringValue() <<endl;
     }
 
     is.close();
@@ -61,14 +61,27 @@ void fileTest() {
     //shared_ptr<Query> query = make_shared<TermQuery>(item);
 
     //BooleanQuery
-    shared_ptr<Query> q1 = make_shared<TermQuery>("gracious,");
-    shared_ptr<Query> q2 = make_shared<TermQuery>("gracious");
-    shared_ptr<Query> q3 = make_shared<TermQuery>("gracious;");
-    shared_ptr<Query> q4 = make_shared<TermQuery>("gratis.");
+    // 0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18 19 21 22 23 24 26 28 29 32 33 35 36 37 39 40 43
+    shared_ptr<Query> q1 = make_shared<TermQuery>("gracious");
+    // 2 12 21 26 28 33 43
+    shared_ptr<Query> q2 = make_shared<TermQuery>("gracious,");
+    // 19 27 38 40
+    shared_ptr<Query> q3 = make_shared<TermQuery>("gracious.");
+    // 15
+    shared_ptr<Query> q4 = make_shared<TermQuery>("gracious:");
+    // 7 12
+    shared_ptr<Query> q5 = make_shared<TermQuery>("gracious;");
+    // 14 23 33 37
+    shared_ptr<Query> q6 = make_shared<TermQuery>("graciously");
+    // 29
+    shared_ptr<Query> q7 = make_shared<TermQuery>("graciously,");
+
     shared_ptr<BooleanQuery> query = make_shared<BooleanQuery>();
     query->add(BooleanQuery::MUST,q1);
-    query->add(BooleanQuery::MUST,q2);
-    query->add(BooleanQuery::MUST_NOT,q3);
-    query->add(BooleanQuery::MUST_NOT,q4);
+    shared_ptr<BooleanQuery> subQuery = make_shared<BooleanQuery>();
+    subQuery->add(BooleanQuery::SHOULD, q2);
+    subQuery->add(BooleanQuery::SHOULD, q3);
+
+    query->add(BooleanQuery::MUST_NOT,subQuery);
     fileTestSearchitem(INDEX_DIR, query);
 }

@@ -42,10 +42,6 @@ public:
         return docID = DOC_EXHAUSTED;
     }
 
-    int cost() {
-        return scost;
-    }
-
     ~ConjunctionScorer() {}
 
 };

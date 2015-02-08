@@ -15,12 +15,14 @@ public:
 
     virtual int next() = 0;
 
+    int cost(){
+        return scost;
+    }
+
     int advance(int doc) {
         while(next() < doc);
         return docID;
     }
-
-    virtual int cost() = 0;
 
     virtual ~Scorer() {}
 

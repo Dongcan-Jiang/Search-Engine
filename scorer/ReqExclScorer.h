@@ -11,22 +11,20 @@ public:
     ReqExclScorer(shared_ptr<Scorer>req, shared_ptr<Scorer>excl){
         this->req = req;
         this->excl = excl;
-        scost = req->cost() + excl->cost();
+        scost = req->cost();
     }
 
     int score() {return{};}
 
     int next() {
-        if(excl->doc() == DOC_EXHAUSTED)
-            return docID = req->next();
         do{
             docID = req->next();
+            if(docID == DOC_EXHAUSTED)
+                break;
+            if(excl->doc() > docID)
+                break;
         }while(excl->doc() == docID || excl->advance(docID) == docID);
         return docID;
-    }
-
-    int cost() {
-        return scost;
     }
 
     ~ReqExclScorer() {}
