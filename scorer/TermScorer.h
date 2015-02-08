@@ -9,6 +9,7 @@ public:
     int begin;
     int end;
     int offset;
+
     TermScorer(ifstream &fin, int begin, int end, int df):in(fin) {
         this->begin = begin;
         this->end = end;

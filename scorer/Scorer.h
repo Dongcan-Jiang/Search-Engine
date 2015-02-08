@@ -6,16 +6,22 @@ public:
     static const int DOC_EXHAUSTED = INT_MAX;
     int docID = -1;
     int scost;
+    int docScore = 0;
     int doc() {
         return docID;
     }
+
     virtual int score() = 0;
+
     virtual int next() = 0;
+
     int advance(int doc) {
         while(next() < doc);
         return docID;
     }
+
     virtual int cost() = 0;
+
     virtual ~Scorer() {}
 
 };

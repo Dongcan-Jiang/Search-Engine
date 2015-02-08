@@ -11,9 +11,11 @@ using namespace std;
 class TermQuery: public Query{
 public:
     string term;
+
     TermQuery(const string &item){
         term = item;
     }
+
     shared_ptr<Scorer> getScorer(IndexSearcher &is){
         ifstream &fin = is.iindexIfstream.iindexPostinglist;
         int termID = is.iindexIfstream.fetchTermID(term);
@@ -26,6 +28,7 @@ public:
         shared_ptr<TermScorer> ts = make_shared<TermScorer>(fin, begin, end, df);
         return ts;
     }
+
     ~TermQuery(){}
 };
 

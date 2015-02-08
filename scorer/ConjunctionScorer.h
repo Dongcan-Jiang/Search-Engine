@@ -7,6 +7,7 @@
 class ConjunctionScorer: public Scorer{
 public:
     vector<shared_ptr<Scorer>> scorers;
+
     ConjunctionScorer(const vector<shared_ptr<Scorer>> & s) {
         assert(s.size() > 1);
         this->scorers = s;
@@ -17,7 +18,9 @@ public:
         );
         scost = scorers[0]->cost();
     }
+
     int score() {return{};}
+
     int next() {
         auto iter = scorers[0];
         iter->next();
@@ -42,6 +45,7 @@ public:
     int cost() {
         return scost;
     }
+
     ~ConjunctionScorer() {}
 
 };

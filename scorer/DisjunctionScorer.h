@@ -6,6 +6,7 @@
 class DisjunctionScorer: public Scorer{
 public:
     vector<shared_ptr<Scorer>> scorers;
+
     static bool greaterDocID (shared_ptr<Scorer> a, shared_ptr<Scorer> b) {
         return b->doc() < a->doc();
     };
@@ -22,7 +23,9 @@ public:
             scost += s->cost();
         }
     }
+
     int score() {return{};}
+
     int next() {
         int minID;
         if(scorers.size() == 0)

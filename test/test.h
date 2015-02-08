@@ -25,6 +25,8 @@ using namespace std;
 #include "../scorer/TermScorer.h"
 #include "../scorer/ConjunctionScorer.h"
 #include "../scorer/DisjunctionScorer.h"
+#include "../scorer/ReqExclScorer.h"
+#include "../scorer/ReqOptScorer.h"
 #include "../util/fs.h"
 
 void simpleTest();

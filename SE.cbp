@@ -47,10 +47,13 @@
 		<Unit filename="document/StoredIfstream.h" />
 		<Unit filename="document/TextField.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="query/BooleanQuery.h" />
 		<Unit filename="query/Query.h" />
 		<Unit filename="query/TermQuery.h" />
 		<Unit filename="scorer/ConjunctionScorer.h" />
 		<Unit filename="scorer/DisjunctionScorer.h" />
+		<Unit filename="scorer/ReqExclScorer.h" />
+		<Unit filename="scorer/ReqOptScorer.h" />
 		<Unit filename="scorer/Scorer.h" />
 		<Unit filename="scorer/TermScorer.h" />
 		<Unit filename="test/fileTest.cpp" />
