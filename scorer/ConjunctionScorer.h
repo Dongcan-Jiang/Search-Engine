@@ -9,7 +9,7 @@ public:
     vector<shared_ptr<Scorer>> scorers;
 
     ConjunctionScorer(const vector<shared_ptr<Scorer>> & s) {
-        assert(s.size() > 1);
+        assert(s.size() > 0);
         this->scorers = s;
         sort(scorers.begin(), scorers.end(),
                 [](shared_ptr<Scorer> s1, shared_ptr<Scorer> s2){

@@ -12,7 +12,7 @@ public:
     };
 
     DisjunctionScorer(const vector<shared_ptr<Scorer>> & sv) {
-        assert(sv.size() > 1);
+        assert(sv.size() > 0);
         for(auto s : sv){
             if(s->next() < DOC_EXHAUSTED)
                 scorers.push_back(s);
