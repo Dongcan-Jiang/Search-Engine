@@ -29,6 +29,10 @@ public:
         return ts;
     }
 
+    string toString() {
+        return term;
+    }
+
     ~TermQuery(){}
 };
 

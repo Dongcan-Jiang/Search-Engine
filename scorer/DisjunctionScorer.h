@@ -31,7 +31,7 @@ public:
         if(scorers.size() == 0)
             return docID = DOC_EXHAUSTED;
         minID = scorers[0]->doc();
-        do{
+            do{
             shared_ptr<Scorer> sc = scorers[0];
             pop_heap(scorers.begin(), scorers.end(), greaterDocID);
             scorers.pop_back();

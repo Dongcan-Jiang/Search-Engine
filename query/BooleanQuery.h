@@ -46,6 +46,27 @@ public:
         return make_shared<ReqOptScorer>(make_shared<ReqExclScorer>(make_shared<ConjunctionScorer>(scorers[MUST]), make_shared<DisjunctionScorer>(scorers[MUST_NOT])), make_shared<DisjunctionScorer>(scorers[SHOULD]));
     }
 
+    string toString() {
+        string s;
+        for(auto m : bq[MUST]){
+            s += "+";
+            s += "(";
+            s += m->toString();
+            s += ") ";
+        }
+        for (auto m : bq[MUST_NOT]) {
+            s += "-";
+            s += "(";
+            s += m->toString();
+            s += ") ";
+        }
+        for (auto m : bq[SHOULD]) {
+            s += "(";
+            s += m->toString();
+            s += ") ";
+        }
+        return s;
+    }
     ~BooleanQuery(){}
 };
 

@@ -62,6 +62,7 @@ void fileTest() {
 
     //BooleanQuery
     // 0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18 19 21 22 23 24 26 28 29 32 33 35 36 37 39 40 43
+/*
     shared_ptr<Query> q1 = make_shared<TermQuery>("gracious");
     // 2 12 21 26 28 33 43
     shared_ptr<Query> q2 = make_shared<TermQuery>("gracious,");
@@ -83,5 +84,13 @@ void fileTest() {
     subQuery->add(BooleanQuery::SHOULD, q3);
 
     query->add(BooleanQuery::MUST_NOT,subQuery);
+*/
+
+    string s ="+gracious -(gracious, gracious.)";
+    QueryParser parser(s);
+    shared_ptr<Query> query = parser.getQuery();
+
+    //cout << query->toString()<<endl;
+
     fileTestSearchitem(INDEX_DIR, query);
 }

@@ -49,6 +49,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="query/BooleanQuery.h" />
 		<Unit filename="query/Query.h" />
+		<Unit filename="query/QueryParser.h" />
 		<Unit filename="query/TermQuery.h" />
 		<Unit filename="scorer/ConjunctionScorer.h" />
 		<Unit filename="scorer/DisjunctionScorer.h" />

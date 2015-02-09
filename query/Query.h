@@ -12,6 +12,7 @@ class IndexSearcher;
 class Query {
 public:
     virtual shared_ptr<Scorer> getScorer(IndexSearcher &is) = 0;
+    virtual string toString() = 0;
     virtual ~Query() {}
 
 };

@@ -21,6 +21,7 @@ using namespace std;
 #include "../query/Query.h"
 #include "../query/TermQuery.h"
 #include "../query/BooleanQuery.h"
+#include "../query/QueryParser.h"
 #include "../scorer/Scorer.h"
 #include "../scorer/TermScorer.h"
 #include "../scorer/ConjunctionScorer.h"
