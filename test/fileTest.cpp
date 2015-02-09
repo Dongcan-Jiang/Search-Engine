@@ -86,9 +86,9 @@ void fileTest() {
     query->add(BooleanQuery::MUST_NOT,subQuery);
 */
 
-    string s ="+gracious -(gracious, gracious.)";
-    QueryParser parser(s);
-    shared_ptr<Query> query = parser.getQuery();
+    string s = "+gracious -(gracious, gracious.)";
+    QueryParser parser;
+    shared_ptr<Query> query = parser.getQuery(s);
 
     //cout << query->toString()<<endl;
 

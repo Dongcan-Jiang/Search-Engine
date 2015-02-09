@@ -8,16 +8,8 @@
 #include "BooleanQuery.h"
 class QueryParser {
 public:
-    string text;
-    vector<string> tokens;
-    stack<int> symbols;
-    stack<shared_ptr<Query>> querys;
-
-    QueryParser(const string& s) {
-        text = s;
-    }
-
-    void toTokens() {
+    vector<string> toTokens(const string& text) {
+        vector<string> tokens;
         size_t start = 0;
         for (size_t i = 0; i <= text.size(); i++) {
             if (i == text.size() || isspace(text[i]) || (i>=1 && (text[i-1]=='+'||text[i-1]=='-'||text[i-1]=='('||text[i-1]==')'))) {
@@ -36,28 +28,26 @@ public:
                     start = i;
             }
         }
-
-        /*test toTokens
-        //for(auto s : tokens) {
-            cout <<s<<"|";
-        }
-        */
-
+        return tokens;
     }
 
-    shared_ptr<Query> getQuery() {
-        toTokens();
+    shared_ptr<Query> getQuery(const string &text) {
+        vector<string> tokens = toTokens(text);
+        stack<int> symbols;
+        stack<shared_ptr<Query>> querys;
         for(size_t i = 0 ; i < tokens.size(); i++) {
             if(tokens[i]=="+"||tokens[i]=="-") {
                 symbols.push(tokens[i][0]);
-                if(i < tokens.size()-1 && tokens[i+1] != "("){
+                if(i+1 == tokens.size() || tokens[i+1] == "+" || tokens[i+1] == "-" ||tokens[i+1] == ")")
+                    throw runtime_error("Parser error:Symbol error");
+                if(tokens[i+1] != "("){
                     i++;
                     querys.push(make_shared<TermQuery>(tokens[i]));
                 }
                 continue;
             }
             if(tokens[i]=="(") {
-                if(tokens[i-1]!="+"&&tokens[i-1]!="-"){
+                if(i==0 || (tokens[i-1]!="+" && tokens[i-1]!="-")){
                     symbols.push('s');
                 }
                 symbols.push(tokens[i][0]);
@@ -68,9 +58,12 @@ public:
                 while(symbols.top()!='('){
                     int symbol = symbols.top();
                     symbols.pop();
+                    if(symbols.empty())
+                        throw runtime_error("Parser error:Symbol error");
                     switch (symbol) {
                         case '+' :
                             q->add(BooleanQuery::MUST, querys.top());
+
                             querys.pop();
                             break;
                         case '-' :
@@ -82,7 +75,7 @@ public:
                             querys.pop();
                             break;
                         default:
-                            cout<<"Something Wrong"<<endl;
+                            throw runtime_error("Parser error: Symbol error");
                     }
                 }
                 symbols.pop();
@@ -110,7 +103,7 @@ public:
                     querys.pop();
                     break;
                 default:
-                    cout<<"Something Wrong"<<endl;
+                    throw runtime_error("Parser error: Symbol error");
             }
         }
         return q;
