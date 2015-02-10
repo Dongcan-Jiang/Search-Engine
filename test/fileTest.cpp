@@ -31,7 +31,7 @@ void readFromFile(IndexWriter &iw, const string &path) {
 }
 
 void fileTestIndex(const string & INDEX_DIR, const string & FILE_PATH) {
-    IndexWriter iw(INDEX_DIR, make_shared<WhitespaceAnalyzer>());
+    IndexWriter iw(INDEX_DIR, make_shared<StandardAnalyzer>());
     iw.setStoredField(vector<string>{"title", "path"});
 
     fs::traverse(FILE_PATH, [&iw](const string & path){
@@ -53,9 +53,21 @@ void fileTestSearchitem(const string & INDEX_DIR, shared_ptr<Query> query) {
     is.close();
 }
 
-void fileTest() {
-    const string INDEX_DIR = "index/";
-    const string FILE_PATH = "shakespeare/input";
+void fileTest(char*argv[]) {
+    if (string(argv[1])=="-i") {
+        const string INDEX_DIR = argv[2];
+        const string FILE_PATH = argv[4];
+        fileTestIndex(INDEX_DIR,FILE_PATH);
+    }
+    if(string(argv[1])=="-s") {
+        const string INDEX_DIR = argv[2];
+        if(string(argv[3])=="-b") {
+            string s = argv[4];
+            QueryParser parser;
+            shared_ptr<Query> query = parser.getQuery(s);
+            fileTestSearchitem(INDEX_DIR, query);
+        }
+    }
     //fileTestIndex(INDEX_DIR,FILE_PATH);
     //TermQuery
     //shared_ptr<Query> query = make_shared<TermQuery>(item);
@@ -86,11 +98,4 @@ void fileTest() {
     query->add(BooleanQuery::MUST_NOT,subQuery);
 */
 
-    string s = "+gracious -(gracious, gracious.)";
-    QueryParser parser;
-    shared_ptr<Query> query = parser.getQuery(s);
-
-    //cout << query->toString()<<endl;
-
-    fileTestSearchitem(INDEX_DIR, query);
 }

@@ -14,7 +14,7 @@ public:
         for (size_t i = 0; i <= text.size(); i++) {
             if (i == text.size() || isspace(text[i]) || (i>=1 && (text[i-1]=='+'||text[i-1]=='-'||text[i-1]=='('||text[i-1]==')'))) {
                 if(i != start) {
-                    if(i>=2 && text[i-1]==')' && !isspace(text[i-2])) {
+                    if(i>=2 && text[i-1]==')' && !(isspace(text[i-2]) || text[i-2]=='+'||text[i-2]=='-'||text[i-2]=='('||text[i-2]==')')) {
                         string token = text.substr(start, i-1-start);
                         tokens.push_back(token);
                         start = i-1;

@@ -48,23 +48,22 @@ public:
 
     string toString() {
         string s;
+        s += "(";
         for(auto m : bq[MUST]){
             s += "+";
-            s += "(";
             s += m->toString();
-            s += ") ";
+            s += " ";
         }
         for (auto m : bq[MUST_NOT]) {
             s += "-";
-            s += "(";
             s += m->toString();
-            s += ") ";
+            s += " ";
         }
         for (auto m : bq[SHOULD]) {
-            s += "(";
             s += m->toString();
-            s += ") ";
+            s += " ";
         }
+        s += ")";
         return s;
     }
     ~BooleanQuery(){}

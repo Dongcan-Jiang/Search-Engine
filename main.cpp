@@ -1,6 +1,6 @@
 #include "test/test.h"
 
-int main() {
+int main(int argc, char*argv[]) {
     /*
     StandardAnalyzer test;
     vector<Token> tokens;
@@ -8,7 +8,8 @@ int main() {
     for (size_t i = 0; i< tokens.size(); i++)
         cout << tokens[i].toString()<< "+";
     */
-    fileTest();
+    assert(argc >= 5);
+    fileTest(argv);
     //simpleTest();
     return 0;
 }
