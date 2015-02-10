@@ -67,7 +67,7 @@ void fileTest(char*argv[]) {
         if(string(argv[3])=="-b") {
             string s = argv[4];
             QueryParser parser;
-            shared_ptr<Query> query = parser.getQuery(s);
+            shared_ptr<Query> query = parser.getQuery(s, make_shared<StandardAnalyzer>());
             cout<<"Query: "<<query->toString()<<endl;
             fileTestSearchitem(INDEX_DIR, query);
         }

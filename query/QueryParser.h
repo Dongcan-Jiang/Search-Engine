@@ -31,7 +31,7 @@ public:
         return tokens;
     }
 
-    shared_ptr<Query> getQuery(const string &text) {
+    shared_ptr<Query> getQuery(const string &text, shared_ptr<Analyzer> analyzer) {
         vector<string> tokens = toTokens(text);
         stack<int> symbols;
         stack<shared_ptr<Query>> querys;
@@ -42,7 +42,7 @@ public:
                     throw runtime_error("Parser error:Symbol error");
                 if(tokens[i+1] != "("){
                     i++;
-                    querys.push(make_shared<TermQuery>(tokens[i]));
+                    querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
                 }
                 continue;
             }
@@ -63,7 +63,6 @@ public:
                     switch (symbol) {
                         case '+' :
                             q->add(BooleanQuery::MUST, querys.top());
-
                             querys.pop();
                             break;
                         case '-' :
@@ -83,7 +82,7 @@ public:
                 continue;
             }
             symbols.push('s');
-            querys.push(make_shared<TermQuery>(tokens[i]));
+            querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
         }
         shared_ptr<BooleanQuery> q= make_shared<BooleanQuery>();
         while(!symbols.empty()){
