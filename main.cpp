@@ -1,5 +1,6 @@
 #include "test/test.h"
 
+
 int main(int argc, char*argv[]) {
     /*
     StandardAnalyzer test;
@@ -9,7 +10,22 @@ int main(int argc, char*argv[]) {
         cout << tokens[i].toString()<< "+";
     */
     assert(argc >= 5);
-    fileTest(argv);
+    const string HELPS[] = {
+        "./main -i INDEX_DIR -d DATA_DIR  : build index",
+        "./main -s INDEX_DIR -b QUERY_STR : boolean search",
+        "./main -h                        : show help message"
+    };
+    if(string(argv[1]) == "-h"){
+        for(auto &h : HELPS)
+            cout << h << endl;
+    }
+    try{
+        fileTest(argv);
+    }catch(invalid_argument &i) {
+        cout << "error: " <<i.what()<<endl;
+        for(auto &h : HELPS)
+            cout << h << endl;
+    }
     //simpleTest();
     return 0;
 }
