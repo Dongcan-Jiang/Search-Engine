@@ -9,7 +9,6 @@ int main(int argc, char*argv[]) {
     for (size_t i = 0; i< tokens.size(); i++)
         cout << tokens[i].toString()<< "+";
     */
-    assert(argc >= 5);
     const string HELPS[] = {
         "./main -i INDEX_DIR -d DATA_DIR  : build index",
         "./main -s INDEX_DIR -b QUERY_STR : boolean search",
@@ -20,6 +19,8 @@ int main(int argc, char*argv[]) {
             cout << h << endl;
     }
     try{
+        if(argc < 5)
+            throw invalid_argument("Command Error.");
         fileTest(argv);
     }catch(invalid_argument &i) {
         cout << "error: " <<i.what()<<endl;

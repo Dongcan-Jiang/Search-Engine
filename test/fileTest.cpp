@@ -62,8 +62,7 @@ void fileTest(char*argv[]) {
         const string INDEX_DIR = argv[2];
         const string FILE_PATH = argv[4];
         fileTestIndex(INDEX_DIR,FILE_PATH);
-    }
-    if(string(argv[1])=="-s") {
+    }else if(string(argv[1])=="-s") {
         const string INDEX_DIR = argv[2];
         if(string(argv[3])=="-b") {
             string s = argv[4];
@@ -72,11 +71,12 @@ void fileTest(char*argv[]) {
             cout<<"Query: "<<query->toString()<<endl;
             fileTestSearchitem(INDEX_DIR, query);
         }
+    }else {
+        throw invalid_argument("Command Error.");
     }
     //fileTestIndex(INDEX_DIR,FILE_PATH);
     //TermQuery
     //shared_ptr<Query> query = make_shared<TermQuery>(item);
-
     //BooleanQuery
     // 0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18 19 21 22 23 24 26 28 29 32 33 35 36 37 39 40 43
 /*
@@ -99,7 +99,6 @@ void fileTest(char*argv[]) {
     shared_ptr<BooleanQuery> subQuery = make_shared<BooleanQuery>();
     subQuery->add(BooleanQuery::SHOULD, q2);
     subQuery->add(BooleanQuery::SHOULD, q3);
-
     query->add(BooleanQuery::MUST_NOT,subQuery);
 */
 
