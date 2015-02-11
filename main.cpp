@@ -14,9 +14,10 @@ int main(int argc, char*argv[]) {
         "./main -s INDEX_DIR -b QUERY_STR : boolean search",
         "./main -h                        : show help message"
     };
-    if(string(argv[1]) == "-h"){
+    if(argc >= 2 && string(argv[1]) == "-h"){
         for(auto &h : HELPS)
             cout << h << endl;
+        return 0;
     }
     try{
         if(argc < 5)

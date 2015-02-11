@@ -55,6 +55,8 @@ public:
             }
             if(tokens[i] == ")") {
                 shared_ptr<BooleanQuery> q= make_shared<BooleanQuery>();
+                if(symbols.empty())
+                    throw runtime_error("Parser error:Symbol error");
                 while(symbols.top()!='('){
                     int symbol = symbols.top();
                     symbols.pop();

@@ -54,8 +54,6 @@ void fileTestSearchitem(const string & INDEX_DIR, shared_ptr<Query> query) {
 }
 
 void fileTest(char*argv[]) {
-    if(!(string(argv[1])=="-i" || string(argv[1])=="-s" || string(argv[1])=="-h"))
-        throw invalid_argument("Command Error.");
     if(string(argv[1])=="-i") {
         if(string(argv[3])!="-d")
             throw invalid_argument("Command Error.");

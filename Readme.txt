@@ -6,7 +6,7 @@ g++ >= 4.8
 Compile & Run
 (1) Windows:
     mingw32-make
-    ./main
+    ./main.exe
 (2) Linux
     make
     ./main
