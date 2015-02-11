@@ -63,9 +63,20 @@ void fileTest(char*argv[]) {
     }else if(string(argv[1])=="-s") {
         const string INDEX_DIR = argv[2];
         if(string(argv[3])=="-b") {
+            /*BooleanQuery
             string s = argv[4];
             QueryParser parser;
             shared_ptr<Query> query = parser.getQuery(s, make_shared<StandardAnalyzer>());
+            */
+
+            //test
+            vector<shared_ptr<TermQuery>> v;
+            v.push_back(make_shared<TermQuery>("the"));
+            v.push_back(make_shared<TermQuery>("in"));
+            v.push_back(make_shared<TermQuery>("language"));
+            v.push_back(make_shared<TermQuery>("pronounce"));
+            shared_ptr<Query> query=make_shared<PhraseQuery>(v,1);
+            //test
             cout<<"Query: "<<query->toString()<<endl;
             fileTestSearchitem(INDEX_DIR, query);
         }

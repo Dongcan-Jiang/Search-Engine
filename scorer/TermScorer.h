@@ -39,6 +39,23 @@ public:
         return docID;
     }
 
+    vector<int> getPosition() {
+        vector<int> pos;
+        int offsetCopy = offset;
+        assert(offsetCopy != -1);
+        assert(offsetCopy <= end);
+        int tf;
+        in.seekg(offsetCopy+sizeof(int)).read((char*)&tf, sizeof(int));
+        offsetCopy += sizeof(int)*2;
+        for(int i = 0; i < tf; i++){
+            int position;
+            in.seekg(offsetCopy).read((char*)&position, sizeof(int));
+            pos.push_back(position);
+            offsetCopy += sizeof(int);
+        }
+        return pos;
+    }
+
     ~TermScorer() {}
 
 };

@@ -22,12 +22,14 @@ using namespace std;
 #include "../query/TermQuery.h"
 #include "../query/BooleanQuery.h"
 #include "../query/QueryParser.h"
+#include "../query/PhraseQuery.h"
 #include "../scorer/Scorer.h"
 #include "../scorer/TermScorer.h"
 #include "../scorer/ConjunctionScorer.h"
 #include "../scorer/DisjunctionScorer.h"
 #include "../scorer/ReqExclScorer.h"
 #include "../scorer/ReqOptScorer.h"
+#include "../scorer/PhraseScorer.h"
 #include "../util/fs.h"
 
 void simpleTest();
