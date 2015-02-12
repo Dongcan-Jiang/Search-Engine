@@ -58,6 +58,7 @@
 		<Unit filename="scorer/ReqExclScorer.h" />
 		<Unit filename="scorer/ReqOptScorer.h" />
 		<Unit filename="scorer/Scorer.h" />
+		<Unit filename="scorer/Skipper.h" />
 		<Unit filename="scorer/TermScorer.h" />
 		<Unit filename="test/fileTest.cpp" />
 		<Unit filename="test/simpleTest.cpp" />

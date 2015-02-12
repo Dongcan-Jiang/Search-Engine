@@ -8,6 +8,9 @@ using namespace std;
 #include "../document/IndexSearcher.h"
 #include "../scorer/TermScorer.h"
 
+//test
+#include "../scorer/Skipper.h"
+
 class TermQuery: public Query{
 public:
     string term;
@@ -26,6 +29,17 @@ public:
         int end = is.iindexIfstream.getPostinglistEnd(termID);
         int df = is.iindexIfstream.getDF(termID);
         shared_ptr<TermScorer> ts = make_shared<TermScorer>(fin, begin, end, df);
+
+        //test
+        cout<<"Posting List: "<<is.iindexIfstream.toString(termID);
+        cout<<endl;
+        Skipper skipper(fin, end);
+        while(skipper.next()!=Skipper::DOC_EXHAUSTED)
+            cout<<"doc: "<<skipper.doc()<<" offset: "<<skipper.offset()<<" ";
+        cout<<endl;
+        cout<<"num "<<skipper.num<<endl;
+        //test
+
         return ts;
     }
 

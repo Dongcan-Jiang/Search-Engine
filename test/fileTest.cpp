@@ -65,6 +65,13 @@ void fileTest(int argc, char*argv[]) {
         string s = argv[4];
         QueryParser parser;
         shared_ptr<Query> query;
+
+        //test
+        if(string(argv[3])=="-t") {
+            query = make_shared<TermQuery>(s);
+        }
+        //test
+
         if(string(argv[3])=="-b") {
             query = parser.getBooleanQuery(s, make_shared<StandardAnalyzer>());
         }else if(string(argv[3])=="-p"){
@@ -72,7 +79,8 @@ void fileTest(int argc, char*argv[]) {
             if(argc > 5)
                 dynamic_pointer_cast<PhraseQuery>(query)->setDis(atoi(argv[5]));
         }else {
-            throw invalid_argument("Command Error.");
+            //save
+            //throw invalid_argument("Command Error.");
         }
         cout<<"Query: "<<query->toString()<<endl;
         fileTestSearchitem(INDEX_DIR, query);

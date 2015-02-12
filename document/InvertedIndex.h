@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <cassert>
+#include <map>
 #include "Posting.h"
 
 /***************************************************************
@@ -44,7 +45,7 @@ public:
     string toString() {
         string s;
         vector<string> order = mapOrder();
-        for(auto &o : order) {
+        for (auto &o : order) {
             s += o;
             s += ":";
             for (auto &posting : invertedIndex[o]) {
@@ -72,7 +73,13 @@ public:
 
             t = indexPostinglist.tellp();
             indexTable.write((char*)&t, sizeof(t));
+            const int INTERVAL = 3;
+            map<int, int> skipPair;
+            int i = 1;
             for (auto &posting : invertedIndex[o]) {
+                if (i%INTERVAL == 0)
+                    skipPair[posting.docID] = indexPostinglist.tellp();
+                i++;
                 posting.writeTo(indexPostinglist);
             }
 
@@ -81,6 +88,17 @@ public:
 
             t = indexPostinglist.tellp();
             indexTable.write((char*)&t, sizeof(t));
+
+            int num = skipPair.size();
+            indexPostinglist.write((char*) &num, sizeof(num));
+            if (num != 0) {
+                for(auto iter = skipPair.begin(); iter!=skipPair.end(); iter++){
+                    int f = iter->first;
+                    int s = iter->second;
+                    indexPostinglist.write((char*) &f, sizeof(f));
+                    indexPostinglist.write((char*) &s, sizeof(s));
+                }
+            }
         }
         indexPostinglist.close();
         indexTerm.close();
