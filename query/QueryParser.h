@@ -111,12 +111,12 @@ public:
         return q;
     }
 
-    shared_ptr<Query> getPhraseQuery(const string &text, int dis, shared_ptr<Analyzer> analyzer) {
+    shared_ptr<Query> getPhraseQuery(const string &text, shared_ptr<Analyzer> analyzer) {
             vector<shared_ptr<TermQuery>> v;
             vector<Token> tokens = analyzer->toTokens(text);
             for(auto t : tokens)
                 v.push_back(make_shared<TermQuery>(t.term));
-            return make_shared<PhraseQuery>(v,dis);
+            return make_shared<PhraseQuery>(v);
     }
 };
 

@@ -42,8 +42,6 @@ public:
         return docID = DOC_EXHAUSTED;
     }
 
-    ~ConjunctionScorer() {}
-
 };
 
 

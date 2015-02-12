@@ -34,13 +34,13 @@ string joinPath(const string& path, const string &filename) {
 
 
 string stem(const string & s){
-    char str[s.size()];
-    for(size_t i = 0; i < s.size(); i++)
-        str[i]=s[i];
+    if(s.size() == 0)
+        return s;
+    char str[s.size()+1];
+    strcpy(str,s.c_str());
     int k = ::stem(str,0,s.size()-1);
     str[k+1]='\0';
-    string st(str);
-    return st;
+    return str;
 }
 
 

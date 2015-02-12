@@ -11,6 +11,9 @@ public:
         this->v = v;
         this->dis = dis;
     }
+    void setDis(int dis){
+        this->dis = dis;
+    }
 
     shared_ptr<Scorer> getScorer(IndexSearcher &is) {
         shared_ptr<PhraseScorer> ps = make_shared<PhraseScorer>(is, v, dis);
@@ -27,7 +30,6 @@ public:
         return s;
     }
 
-    ~PhraseQuery(){}
 };
 
 #endif // PHRASEQUERY_H_INCLUDED

@@ -35,6 +35,6 @@ using namespace std;
 
 void simpleTest();
 
-void fileTest(char*argv[]);
+void fileTest(int agrc, char*argv[]);
 
 #endif // TEST_H_INCLUDED

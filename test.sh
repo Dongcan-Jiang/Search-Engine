@@ -13,3 +13,7 @@ $PROGRAM -s index -b "+(about -above) +abridgement"
 $PROGRAM -s index -b "(about -above) abridgement"
 $PROGRAM -s index -b "(about -above) abridgement -(+(about -above) +abridgement)"
 $PROGRAM -s index -b "(about -above) abridgement -(+(about -above) +abridgement) -acquit"
+$PROGRAM -s index -p "content to say" 0
+$PROGRAM -s index -p "When the hath ten one" 1
+$PROGRAM -s index -p "Nor armed"
+

@@ -74,8 +74,6 @@ public:
         return DOC_EXHAUSTED;
     }
 
-    ~PhraseScorer() {}
-
 };
 
 

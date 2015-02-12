@@ -55,8 +55,6 @@ public:
         return pos;
     }
 
-    ~TermScorer() {}
-
 };
 
 #endif // TERMSCORER_H_INCLUDED

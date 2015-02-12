@@ -66,7 +66,7 @@ public:
         s += ")";
         return s;
     }
-    ~BooleanQuery(){}
+
 };
 
 

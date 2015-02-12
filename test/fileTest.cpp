@@ -53,7 +53,7 @@ void fileTestSearchitem(const string & INDEX_DIR, shared_ptr<Query> query) {
     is.close();
 }
 
-void fileTest(char*argv[]) {
+void fileTest(int argc, char*argv[]) {
     if(string(argv[1])=="-i") {
         if(string(argv[3])!="-d")
             throw invalid_argument("Command Error.");
@@ -68,8 +68,9 @@ void fileTest(char*argv[]) {
         if(string(argv[3])=="-b") {
             query = parser.getBooleanQuery(s, make_shared<StandardAnalyzer>());
         }else if(string(argv[3])=="-p"){
-            int dis = atoi(argv[5]);
-            query = parser.getPhraseQuery(s, dis, make_shared<StandardAnalyzer>());
+            query = parser.getPhraseQuery(s,make_shared<StandardAnalyzer>());
+            if(argc > 5)
+                dynamic_pointer_cast<PhraseQuery>(query)->setDis(atoi(argv[5]));
         }else {
             throw invalid_argument("Command Error.");
         }
@@ -78,32 +79,4 @@ void fileTest(char*argv[]) {
     }else {
         throw invalid_argument("Command Error.");
     }
-    //fileTestIndex(INDEX_DIR,FILE_PATH);
-    //TermQuery
-    //shared_ptr<Query> query = make_shared<TermQuery>(item);
-    //BooleanQuery
-    // 0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18 19 21 22 23 24 26 28 29 32 33 35 36 37 39 40 43
-/*
-    shared_ptr<Query> q1 = make_shared<TermQuery>("gracious");
-    // 2 12 21 26 28 33 43
-    shared_ptr<Query> q2 = make_shared<TermQuery>("gracious,");
-    // 19 27 38 40
-    shared_ptr<Query> q3 = make_shared<TermQuery>("gracious.");
-    // 15
-    shared_ptr<Query> q4 = make_shared<TermQuery>("gracious:");
-    // 7 12
-    shared_ptr<Query> q5 = make_shared<TermQuery>("gracious;");
-    // 14 23 33 37
-    shared_ptr<Query> q6 = make_shared<TermQuery>("graciously");
-    // 29
-    shared_ptr<Query> q7 = make_shared<TermQuery>("graciously,");
-
-    shared_ptr<BooleanQuery> query = make_shared<BooleanQuery>();
-    query->add(BooleanQuery::MUST,q1);
-    shared_ptr<BooleanQuery> subQuery = make_shared<BooleanQuery>();
-    subQuery->add(BooleanQuery::SHOULD, q2);
-    subQuery->add(BooleanQuery::SHOULD, q3);
-    query->add(BooleanQuery::MUST_NOT,subQuery);
-*/
-
 }

@@ -26,7 +26,6 @@ public:
         return docID ;
     }
 
-    ~ReqOptScorer() {}
 };
 
 #endif // REQOPTSCORER_H_INCLUDED

@@ -27,7 +27,6 @@ public:
         return docID;
     }
 
-    ~ReqExclScorer() {}
 };
 
 #endif // REQEXCLSCORER_H_INCLUDED

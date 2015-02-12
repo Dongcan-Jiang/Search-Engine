@@ -33,7 +33,6 @@ public:
         return term;
     }
 
-    ~TermQuery(){}
 };
 
 #endif // TERMQUERY_H_INCLUDED

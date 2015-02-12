@@ -43,8 +43,6 @@ public:
         return docID = minID;
     }
 
-    ~DisjunctionScorer() {}
-
 };
 
 #endif // DISJUNCTIONSCORER_H_INCLUDED
