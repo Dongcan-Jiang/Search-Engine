@@ -6,9 +6,10 @@
 #include <vector>
 #include "TermQuery.h"
 #include "BooleanQuery.h"
+#include "PhraseQuery.h"
 class QueryParser {
 public:
-    vector<string> toTokens(const string& text) {
+    vector<string> toBooleanTokens(const string& text) {
         vector<string> tokens;
         size_t start = 0;
         for (size_t i = 0; i <= text.size(); i++) {
@@ -31,8 +32,8 @@ public:
         return tokens;
     }
 
-    shared_ptr<Query> getQuery(const string &text, shared_ptr<Analyzer> analyzer) {
-        vector<string> tokens = toTokens(text);
+    shared_ptr<Query> getBooleanQuery(const string &text, shared_ptr<Analyzer> analyzer) {
+        vector<string> tokens = toBooleanTokens(text);
         stack<int> symbols;
         stack<shared_ptr<Query>> querys;
         for(size_t i = 0 ; i < tokens.size(); i++) {
@@ -110,6 +111,13 @@ public:
         return q;
     }
 
+    shared_ptr<Query> getPhraseQuery(const string &text, int dis, shared_ptr<Analyzer> analyzer) {
+            vector<shared_ptr<TermQuery>> v;
+            vector<Token> tokens = analyzer->toTokens(text);
+            for(auto t : tokens)
+                v.push_back(make_shared<TermQuery>(t.term));
+            return make_shared<PhraseQuery>(v,dis);
+    }
 };
 
 

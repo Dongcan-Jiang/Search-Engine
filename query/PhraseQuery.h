@@ -23,7 +23,7 @@ public:
             s += v[i]->toString();
             s += " ";
         }
-        s = "~" + to_string(dis);
+        s += "~" + to_string(dis);
         return s;
     }
 
