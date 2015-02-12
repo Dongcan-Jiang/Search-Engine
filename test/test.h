@@ -30,7 +30,7 @@ using namespace std;
 #include "../scorer/ReqExclScorer.h"
 #include "../scorer/ReqOptScorer.h"
 #include "../scorer/PhraseScorer.h"
-#include "../util/fs.h"
+#include "../util/util.h"
 
 void simpleTest();
 

@@ -42,8 +42,7 @@ public:
     vector<int> getPosition() {
         vector<int> pos;
         int offsetCopy = offset;
-        assert(offsetCopy != -1);
-        assert(offsetCopy <= end);
+        assert(offsetCopy >= begin && offsetCopy < end);
         int tf;
         in.seekg(offsetCopy+sizeof(int)).read((char*)&tf, sizeof(int));
         offsetCopy += sizeof(int)*2;

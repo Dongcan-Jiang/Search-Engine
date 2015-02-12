@@ -1,5 +1,6 @@
 #ifndef STANDARDANALYZER_H_INCLUDED
 #define STANDARDANALYZER_H_INCLUDED
+#include "../util/util.h"
 
 class StandardAnalyzer : public Analyzer   {
 public:
@@ -29,6 +30,7 @@ public:
         string term = str;
         for (size_t i = 0; i< str.size(); i++)
             term[i] = tolower(str[i]);
+        term = util::stem(term);
         return term;
     }
 

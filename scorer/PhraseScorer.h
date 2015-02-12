@@ -8,7 +8,7 @@ public:
     vector<shared_ptr<TermScorer>> ts;
     int dis;
     PhraseScorer(IndexSearcher &is, const vector<shared_ptr<TermQuery>> &v, int dis) {
-        assert(v.size() > 0);
+        assert(v.size() > 0 && dis >= 0);
         for(size_t i = 0; i < v.size(); i++)
             ts.push_back(dynamic_pointer_cast<TermScorer>(v[i]->getScorer(is)));
         this->dis = dis;
@@ -18,13 +18,12 @@ public:
     int score() {return{};}
 
     vector<int> mergePosition(const vector<int> &v1, const vector<int> &v2) {
-        assert(v1.size()>0 && v2.size()>0 && dis >= 0);
         int p1 = 0;
         int p2 = 0;
         vector<int> v;
         int s1 = v1.size();
         int s2 = v2.size();
-        while(p2 < s2){
+        while(p1 <s1 && p2 < s2){
             int d = v1[p1]+1-v2[p2];
             if(d < -dis){
                 p1++;
@@ -34,8 +33,6 @@ public:
             }else{
                 p2++;
             }
-            if(p1==s1)
-                break;
         }
         return v;
     }

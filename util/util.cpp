@@ -1,8 +1,11 @@
-#include "fs.h"
+#include "util.h"
 
 #include <cassert>
 
-namespace fs {
+
+int stem(char * p, int i, int j);
+
+namespace util {
 
 using namespace std;
 
@@ -28,4 +31,18 @@ string joinPath(const string& path, const string &filename) {
     return res;
 }
 
-} // THE END OF NAMESPACE fs
+
+
+string stem(const string & s){
+    char str[s.size()];
+    for(size_t i = 0; i < s.size(); i++)
+        str[i]=s[i];
+    int k = ::stem(str,0,s.size()-1);
+    str[k+1]='\0';
+    string st(str);
+    return st;
+}
+
+
+
+} // THE END OF NAMESPACE util

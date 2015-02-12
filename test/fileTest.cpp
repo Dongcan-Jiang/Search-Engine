@@ -34,7 +34,7 @@ void fileTestIndex(const string & INDEX_DIR, const string & FILE_PATH) {
     IndexWriter iw(INDEX_DIR, make_shared<StandardAnalyzer>());
     iw.setStoredField(vector<string>{"title", "path"});
 
-    fs::traverse(FILE_PATH, [&iw](const string & path){
+    util::traverse(FILE_PATH, [&iw](const string & path){
         readFromFile(iw, path);
     });
 

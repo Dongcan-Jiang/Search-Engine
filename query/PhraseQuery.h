@@ -7,7 +7,7 @@ class PhraseQuery: public Query{
 public:
     vector<shared_ptr<TermQuery>> v;
     int dis;
-    PhraseQuery(const vector<shared_ptr<TermQuery>> &v, int dis) {
+    PhraseQuery(const vector<shared_ptr<TermQuery>> &v, int dis = 5) {
         this->v = v;
         this->dis = dis;
     }
@@ -23,7 +23,7 @@ public:
             s += v[i]->toString();
             s += " ";
         }
-        s = s + "dis: " + to_string(dis);
+        s = "~" + to_string(dis);
         return s;
     }
 

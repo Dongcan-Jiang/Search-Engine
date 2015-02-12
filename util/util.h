@@ -1,18 +1,20 @@
-#ifndef FS_H_INCLUDED
-#define FS_H_INCLUDED
+#ifndef UTIL_H_INCLUDED
+#define UTIL_H_INCLUDED
 
 #include <string>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
 
-namespace fs {
+namespace util {
+
 
 using namespace std;
 
 string joinPath(const string& path, const string &filename);
 bool isDir(const char *path);
 bool isFile(const char *path);
+string stem(const string & s);
 template <typename Func>
 void traverse(const string &path,const Func &func) {
     DIR *dir = opendir(path.c_str());
@@ -32,5 +34,5 @@ void traverse(const string &path,const Func &func) {
 
 }
 
-#endif // FS_H_INCLUDED
+#endif // UTIL_H_INCLUDED
 

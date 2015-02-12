@@ -62,8 +62,9 @@
 		<Unit filename="test/fileTest.cpp" />
 		<Unit filename="test/simpleTest.cpp" />
 		<Unit filename="test/test.h" />
-		<Unit filename="util/fs.cpp" />
-		<Unit filename="util/fs.h" />
+		<Unit filename="util/stemmer.cpp" />
+		<Unit filename="util/util.cpp" />
+		<Unit filename="util/util.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
