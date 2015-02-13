@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <algorithm>
 #include <cassert>
-#include <map>
 #include "Posting.h"
 
 /***************************************************************
@@ -74,11 +73,11 @@ public:
             t = indexPostinglist.tellp();
             indexTable.write((char*)&t, sizeof(t));
             const int INTERVAL = 3;
-            map<int, int> skipPair;
+            vector<pair<int, int>> skipPair;
             int i = 1;
             for (auto &posting : invertedIndex[o]) {
                 if (i%INTERVAL == 0)
-                    skipPair[posting.docID] = indexPostinglist.tellp();
+                    skipPair.push_back(make_pair(posting.docID, indexPostinglist.tellp()));
                 i++;
                 posting.writeTo(indexPostinglist);
             }
@@ -92,9 +91,9 @@ public:
             int num = skipPair.size();
             indexPostinglist.write((char*) &num, sizeof(num));
             if (num != 0) {
-                for(auto iter = skipPair.begin(); iter!=skipPair.end(); iter++){
-                    int f = iter->first;
-                    int s = iter->second;
+                for (auto &p : skipPair) {
+                    int f = p.first;
+                    int s = p.second;
                     indexPostinglist.write((char*) &f, sizeof(f));
                     indexPostinglist.write((char*) &s, sizeof(s));
                 }

@@ -2,7 +2,7 @@
 #define TERMSCORER_H_INCLUDED
 
 #include "Scorer.h"
-
+#include "Skipper.h"
 class TermScorer: public Scorer{
 public:
     ifstream &in;
@@ -17,9 +17,9 @@ public:
         scost = df;
     }
 
-    int score() {return{};}
+    virtual int score() {return{};}
 
-    int next() {
+    virtual int next() {
         if(offset < begin) {
             offset = begin;
             if(offset >= end)
@@ -39,7 +39,7 @@ public:
         return docID;
     }
 
-    vector<int> getPosition() {
+    virtual vector<int> getPosition() {
         vector<int> pos;
         int offsetCopy = offset;
         assert(offsetCopy >= begin && offsetCopy < end);
@@ -54,6 +54,31 @@ public:
         }
         return pos;
     }
+
+
+    virtual int advance(int doc){
+        Skipper skipper(in, end);
+        int id = -1;
+        int poffset = -1;
+        while(skipper.next() <= doc) {
+            id = skipper.doc();
+            poffset = skipper.offset();
+        }
+        if (poffset > offset) {
+            docID = id;
+            offset = poffset;
+        }
+
+        if (docID == doc)
+            return docID;
+        else
+            while(next() < doc);
+
+        return docID;
+    }
+
+
+    ~TermScorer(){}
 
 };
 

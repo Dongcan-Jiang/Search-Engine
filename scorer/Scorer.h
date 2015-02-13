@@ -7,7 +7,7 @@ public:
     int docID = -1;
     int scost;
     int docScore = 0;
-    int doc() {
+    virtual int doc() {
         return docID;
     }
 
@@ -15,11 +15,11 @@ public:
 
     virtual int next() = 0;
 
-    int cost(){
+    virtual int cost(){
         return scost;
     }
 
-    int advance(int doc) {
+    virtual int advance(int doc) {
         while(next() < doc);
         return docID;
     }
