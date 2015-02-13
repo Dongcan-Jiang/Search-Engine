@@ -1,25 +1,25 @@
 #ifndef TERMSCORER_H_INCLUDED
 #define TERMSCORER_H_INCLUDED
 
-#include "Scorer.h"
+#include "PositionAbleScorer.h"
 #include "Skipper.h"
-class TermScorer: public Scorer{
+class TermScorer: public PositionAbleScorer {
 public:
     ifstream &in;
     int begin;
     int end;
     int offset;
-
-    TermScorer(ifstream &fin, int begin, int end, int df):in(fin) {
+    Skipper skipper;
+    TermScorer(ifstream &fin, int begin, int end, int df):in(fin), skipper(in, end) {
         this->begin = begin;
         this->end = end;
         offset = -1;
         scost = df;
     }
 
-    virtual int score() {return{};}
+    int score() {return{};}
 
-    virtual int next() {
+    int next() {
         if(offset < begin) {
             offset = begin;
             if(offset >= end)
@@ -39,7 +39,7 @@ public:
         return docID;
     }
 
-    virtual vector<int> getPosition() {
+    vector<int> getPosition() {
         vector<int> pos;
         int offsetCopy = offset;
         assert(offsetCopy >= begin && offsetCopy < end);
@@ -55,9 +55,7 @@ public:
         return pos;
     }
 
-
-    virtual int advance(int doc){
-        Skipper skipper(in, end);
+    int advance(int doc){
         int id = -1;
         int poffset = -1;
         while(skipper.next() <= doc) {
@@ -68,15 +66,11 @@ public:
             docID = id;
             offset = poffset;
         }
-
         if (docID == doc)
             return docID;
         else
-            while(next() < doc);
-
-        return docID;
+            return Scorer::advance(doc);
     }
-
 
     ~TermScorer(){}
 
