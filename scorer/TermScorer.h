@@ -10,6 +10,8 @@ public:
     int end;
     int offset;
     Skipper skipper;
+    int id = -1;
+    int poffset = -1;
     TermScorer(ifstream &fin, int begin, int end, int df):in(fin), skipper(in, end) {
         this->begin = begin;
         this->end = end;
@@ -56,12 +58,10 @@ public:
     }
 
     int advance(int doc) {
-        int id;
-        int poffset;
-        do{
+        while(skipper.doc() < doc && skipper.next() <= doc) {
             id = skipper.doc();
             poffset = skipper.offset();
-        }while(skipper.doc() < doc && skipper.next() <= doc);
+        }
         if (id > docID) {
             docID = id;
             offset = poffset;
