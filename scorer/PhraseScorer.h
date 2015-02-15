@@ -5,12 +5,12 @@
 
 class PhraseScorer: public Scorer{
 public:
-    vector<shared_ptr<TermScorer>> ts;
+    vector<shared_ptr<PositionAbleScorer>> ts;
     int dis;
     PhraseScorer(IndexSearcher &is, const vector<shared_ptr<TermQuery>> &v, int dis) {
         assert(v.size() > 0 && dis >= 0);
         for(size_t i = 0; i < v.size(); i++)
-            ts.push_back(dynamic_pointer_cast<TermScorer>(v[i]->getScorer(is)));
+            ts.push_back(dynamic_pointer_cast<PositionAbleScorer>(v[i]->getScorer(is)));
         this->dis = dis;
         scost = ts[0]->cost();
     }

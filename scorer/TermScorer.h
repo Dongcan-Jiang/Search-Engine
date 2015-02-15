@@ -55,14 +55,14 @@ public:
         return pos;
     }
 
-    int advance(int doc){
-        int id = -1;
-        int poffset = -1;
-        while(skipper.next() <= doc) {
+    int advance(int doc) {
+        int id;
+        int poffset;
+        do{
             id = skipper.doc();
             poffset = skipper.offset();
-        }
-        if (poffset > offset) {
+        }while(skipper.doc() < doc && skipper.next() <= doc);
+        if (id > docID) {
             docID = id;
             offset = poffset;
         }
@@ -71,8 +71,6 @@ public:
         else
             return Scorer::advance(doc);
     }
-
-    ~TermScorer(){}
 
 };
 
