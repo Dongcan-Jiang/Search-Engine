@@ -44,6 +44,8 @@ public:
             int docid = iter->doc();
             size_t i;
             for(i = 1; i < ts.size(); i++) {
+                if(ts[i]->doc() > docid)
+                        break;
                 if(ts[i]->doc() < docid){
                     if(ts[i]->advance(docid) > docid)
                         break;

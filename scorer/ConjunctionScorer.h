@@ -28,6 +28,8 @@ public:
             int docid = iter->doc();
             size_t i;
             for(i = 1; i < scorers.size(); i++) {
+                if(scorers[i]->doc() > docid)
+                        break;
                 if(scorers[i]->doc() < docid){
                     if(scorers[i]->advance(docid) > docid)
                         break;
@@ -52,8 +54,6 @@ public:
                 return docID = DOC_EXHAUSTED;
         size_t i;
         for (i = 1; i < scorers.size(); i++) {
-            if (scorers[i]->doc() < doc)
-                scorers[i]->advance(doc);
             if (scorers[i]->doc() ==DOC_EXHAUSTED)
                 return docID = DOC_EXHAUSTED;
             if (scorers[i]->doc() < firstdoc) {
