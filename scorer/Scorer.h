@@ -1,6 +1,8 @@
 #ifndef SCORER_H_INCLUDED
 #define SCORER_H_INCLUDED
 
+#include <cassert>
+
 class Scorer {
 public:
     static const int DOC_EXHAUSTED = INT_MAX;
@@ -21,6 +23,7 @@ public:
     }
     //0 <= doc < DOC_EXHAUSTED, unpredictable when scorer's current docID >= doc.
     virtual int advance(int doc) {
+        assert(docID < doc);
         while(next() < doc);
         return docID;
     }

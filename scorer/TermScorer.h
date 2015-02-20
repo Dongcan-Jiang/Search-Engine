@@ -58,6 +58,7 @@ public:
     }
 
     int advance(int doc) {
+        assert(docID < doc);
         while(skipper.doc() < doc && skipper.next() <= doc) {
             id = skipper.doc();
             poffset = skipper.offset();
