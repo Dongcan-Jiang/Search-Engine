@@ -16,6 +16,7 @@ public:
     int score() {
         return docScore;
     }
+
     int next() {
         docID = req->next();
         docScore = req->score();

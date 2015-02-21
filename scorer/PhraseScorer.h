@@ -76,6 +76,31 @@ public:
         return DOC_EXHAUSTED;
     }
 
+    int advance(int doc) {
+        assert(docID < doc);
+        if (ts[0]->doc() < doc)
+            ts[0]->advance(doc);
+        int firstdoc = ts[0]->doc();
+        if (ts[0]->doc() ==DOC_EXHAUSTED)
+                return docID = DOC_EXHAUSTED;
+        size_t i;
+        for (i = 1; i < ts.size(); i++) {
+            if (ts[i]->doc() ==DOC_EXHAUSTED)
+                return docID = DOC_EXHAUSTED;
+            if (ts[i]->doc() < firstdoc) {
+                if (ts[i]->advance(firstdoc) > firstdoc)
+                    break;
+            }
+        }
+        if(i == ts.size())
+            return docID = firstdoc;
+        if(ts[i]->doc() == DOC_EXHAUSTED)
+            return docID = DOC_EXHAUSTED;
+        else
+            return next();
+    }
+
+
 
 };
 
