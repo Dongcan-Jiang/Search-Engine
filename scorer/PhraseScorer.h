@@ -37,7 +37,9 @@ public:
         return v;
     }
 
-    int findNextDoc(shared_ptr<Scorer> iter) {
+    //find next doc which all scorers have and is not less than scorers[0]->doc().
+    int findNextDoc() {
+        auto iter = ts[0];
         while(iter->doc() < DOC_EXHAUSTED) {
             int docid = iter->doc();
             size_t i;
@@ -57,9 +59,8 @@ public:
     }
 
     int findDoc() {
-        auto iter = ts[0];
-        iter->next();
-        return findNextDoc(iter);
+        ts[0]->next();
+        return findNextDoc();
     }
 
     bool checkPosition() {
@@ -78,7 +79,7 @@ public:
     }
 
     int next() {
-        while(findDoc()!=DOC_EXHAUSTED){
+        while(findDoc()!= DOC_EXHAUSTED) {
             if(checkPosition())
                 return docID;
         }
@@ -88,7 +89,10 @@ public:
     int advance(int doc) {
         assert(docID < doc);
         ts[0]->advance(doc);
-        return findNextDoc(ts[0]);
+        if(findNextDoc() != DOC_EXHAUSTED)
+            if(checkPosition())
+                return docID;
+        return next();
     }
 
 

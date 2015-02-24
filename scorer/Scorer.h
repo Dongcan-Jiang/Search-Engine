@@ -2,6 +2,7 @@
 #define SCORER_H_INCLUDED
 
 #include <cassert>
+#include "../debug/SeDebug.h"
 
 class Scorer {
 public:

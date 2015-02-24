@@ -29,6 +29,7 @@ public:
     }
 
     int advance(int doc) {
+        assert(docID < doc);
         req->advance(doc);
         if (req->doc() == DOC_EXHAUSTED)
             return docID = DOC_EXHAUSTED;

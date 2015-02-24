@@ -21,7 +21,9 @@ public:
 
     int score() {return{};}
 
-    int findNext(shared_ptr<Scorer> iter) {
+    //find next doc which all scorers have and is not less than scorers[0]->doc().
+    int findNext() {
+        auto iter = scorers[0];
         while(iter->doc() < DOC_EXHAUSTED) {
             int docid = iter->doc();
             size_t i;
@@ -41,15 +43,14 @@ public:
     }
 
     int next() {
-        auto iter = scorers[0];
-        iter->next();
-        return findNext(iter);
+        scorers[0]->next();
+        return findNext();
     }
 
     int advance(int doc) {
         assert(docID < doc);
         scorers[0]->advance(doc);
-        return findNext(scorers[0]);
+        return findNext();
     }
 
 };

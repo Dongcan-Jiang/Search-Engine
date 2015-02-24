@@ -62,7 +62,7 @@ public:
             i++;
         }
         if(scorers[i]->doc() == DOC_EXHAUSTED)
-                scorers.resize(i);
+            scorers.resize(i);
         make_heap(scorers.begin(), scorers.end(), greaterDocID);
         return next();
     }

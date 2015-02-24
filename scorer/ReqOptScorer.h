@@ -18,7 +18,7 @@ public:
     }
 
     int findOpt() {
-         if (docID == DOC_EXHAUSTED)
+        if (docID == DOC_EXHAUSTED)
             return docID;
         docScore = req->score();
         if (opt->doc() <= docID) {
@@ -34,6 +34,7 @@ public:
     }
 
     int advance(int doc) {
+        assert(docID < doc);
         docID = req->advance(doc);
         return findOpt();
     }

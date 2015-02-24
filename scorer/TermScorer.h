@@ -3,6 +3,7 @@
 
 #include "PositionAbleScorer.h"
 #include "Skipper.h"
+
 class TermScorer: public PositionAbleScorer {
 public:
     ifstream &in;
