@@ -1,6 +1,6 @@
 #ifndef DEBUG_H_INCLUDED
 #define DEBUG_H_INCLUDED
 
-#define _DEBUG_ADVANCE_
+//#define _DEBUG_ADVANCE_
 
 #endif // DEBUG_H_INCLUDED
