@@ -44,7 +44,9 @@ public:
     }
 
     int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         for (size_t i = 0; i < scorers.size(); i++) {
             if (scorers[i]->doc() < doc)
                 scorers[i]->advance(doc);

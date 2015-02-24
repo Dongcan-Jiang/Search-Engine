@@ -57,7 +57,9 @@ public:
     }
 
     int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         while(skipper.doc() <= doc) {
             skipper.next();
         }

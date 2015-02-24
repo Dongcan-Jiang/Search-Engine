@@ -29,7 +29,9 @@ public:
     }
 
     int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         req->advance(doc);
         if (req->doc() == DOC_EXHAUSTED)
             return docID = DOC_EXHAUSTED;

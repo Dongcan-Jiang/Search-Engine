@@ -24,7 +24,9 @@ public:
     }
     //0 <= doc < DOC_EXHAUSTED, unpredictable when scorer's current docID >= doc.
     virtual int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         while(next() < doc);
         return docID;
     }

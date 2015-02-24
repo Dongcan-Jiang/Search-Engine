@@ -34,7 +34,9 @@ public:
     }
 
     int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         docID = req->advance(doc);
         return findOpt();
     }

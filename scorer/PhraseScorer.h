@@ -87,7 +87,9 @@ public:
     }
 
     int advance(int doc) {
+        #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
+        #endif
         ts[0]->advance(doc);
         if(findNextDoc() != DOC_EXHAUSTED)
             if(checkPosition())
