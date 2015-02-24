@@ -37,16 +37,12 @@ public:
         return v;
     }
 
-    int findDoc() {
-        auto iter = ts[0];
-        iter->next();
+    int findNextDoc(shared_ptr<Scorer> iter) {
         while(iter->doc() < DOC_EXHAUSTED) {
             int docid = iter->doc();
             size_t i;
             for(i = 1; i < ts.size(); i++) {
-                if(ts[i]->doc() > docid)
-                        break;
-                if(ts[i]->doc() < docid){
+                if (ts[i]->doc() < docid){
                     if(ts[i]->advance(docid) > docid)
                         break;
                 }
@@ -60,17 +56,30 @@ public:
         return docID = DOC_EXHAUSTED;
     }
 
+    int findDoc() {
+        auto iter = ts[0];
+        iter->next();
+        return findNextDoc(iter);
+    }
+
+    bool checkPosition() {
+        vector<int> v1 = ts[0]->getPosition();
+        vector<int> v2;
+        for(size_t i = 1; i < ts.size(); i++){
+            v2 = ts[i]->getPosition();
+            v1 = mergePosition(v1,v2);
+            if(v1.size()==0)
+                break;
+        }
+        if(v1.size()!=0)
+            return true;
+        else
+            return false;
+    }
+
     int next() {
         while(findDoc()!=DOC_EXHAUSTED){
-            vector<int> v1 = ts[0]->getPosition();
-            vector<int> v2;
-            for(size_t i = 1; i < ts.size(); i++){
-                v2 = ts[i]->getPosition();
-                v1 = mergePosition(v1,v2);
-                if(v1.size()==0)
-                    break;
-            }
-            if(v1.size()!=0)
+            if(checkPosition())
                 return docID;
         }
         return DOC_EXHAUSTED;
@@ -78,26 +87,8 @@ public:
 
     int advance(int doc) {
         assert(docID < doc);
-        if (ts[0]->doc() < doc)
-            ts[0]->advance(doc);
-        int firstdoc = ts[0]->doc();
-        if (ts[0]->doc() ==DOC_EXHAUSTED)
-                return docID = DOC_EXHAUSTED;
-        size_t i;
-        for (i = 1; i < ts.size(); i++) {
-            if (ts[i]->doc() ==DOC_EXHAUSTED)
-                return docID = DOC_EXHAUSTED;
-            if (ts[i]->doc() < firstdoc) {
-                if (ts[i]->advance(firstdoc) > firstdoc)
-                    break;
-            }
-        }
-        if(i == ts.size())
-            return docID = firstdoc;
-        if(ts[i]->doc() == DOC_EXHAUSTED)
-            return docID = DOC_EXHAUSTED;
-        else
-            return next();
+        ts[0]->advance(doc);
+        return findNextDoc(ts[0]);
     }
 
 

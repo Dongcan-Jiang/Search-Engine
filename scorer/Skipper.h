@@ -11,6 +11,9 @@ public:
     int soffset = -1;
     int num;
     int skip = 0;
+    int preid = -1;
+    int prepoffset = -1;
+
 
     Skipper(ifstream &fin, int begin):in(fin) {
         this->begin = begin;
@@ -20,6 +23,8 @@ public:
     int next() {
         if(num == 0)
             return docID = DOC_EXHAUSTED;
+        preid = docID;
+        prepoffset = poffset;
         if(soffset < begin) {
             soffset = begin;
             soffset += sizeof(int);

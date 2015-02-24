@@ -21,19 +21,19 @@ public:
             docID = req->next();
             if(docID == DOC_EXHAUSTED)
                 break;
-            if(excl->doc() < docID)
+            if(excl->doc() < docID) {
                 excl->advance(docID);
+            }
         }while(excl->doc() == docID);
         return docID;
     }
 
     int advance(int doc) {
-        if (req->doc() < doc)
-            req->advance(doc);
+        req->advance(doc);
         if (req->doc() == DOC_EXHAUSTED)
             return docID = DOC_EXHAUSTED;
         int reqdoc = req->doc();
-        if (excl->doc()<reqdoc)
+        if (excl->doc() < reqdoc)
             excl->advance(reqdoc);
         if (excl->doc() != reqdoc)
             return docID = reqdoc;

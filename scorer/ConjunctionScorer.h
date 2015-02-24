@@ -21,15 +21,11 @@ public:
 
     int score() {return{};}
 
-    int next() {
-        auto iter = scorers[0];
-        iter->next();
+    int findNext(shared_ptr<Scorer> iter) {
         while(iter->doc() < DOC_EXHAUSTED) {
             int docid = iter->doc();
             size_t i;
             for(i = 1; i < scorers.size(); i++) {
-                if(scorers[i]->doc() > docid)
-                        break;
                 if(scorers[i]->doc() < docid){
                     if(scorers[i]->advance(docid) > docid)
                         break;
@@ -44,29 +40,16 @@ public:
         return docID = DOC_EXHAUSTED;
     }
 
+    int next() {
+        auto iter = scorers[0];
+        iter->next();
+        return findNext(iter);
+    }
 
     int advance(int doc) {
         assert(docID < doc);
-        if (scorers[0]->doc() < doc)
-            scorers[0]->advance(doc);
-        int firstdoc = scorers[0]->doc();
-        if (scorers[0]->doc() ==DOC_EXHAUSTED)
-                return docID = DOC_EXHAUSTED;
-        size_t i;
-        for (i = 1; i < scorers.size(); i++) {
-            if (scorers[i]->doc() ==DOC_EXHAUSTED)
-                return docID = DOC_EXHAUSTED;
-            if (scorers[i]->doc() < firstdoc) {
-                if (scorers[i]->advance(firstdoc) > firstdoc)
-                    break;
-            }
-        }
-        if(i == scorers.size())
-            return docID = firstdoc;
-        if(scorers[i]->doc() == DOC_EXHAUSTED)
-            return docID = DOC_EXHAUSTED;
-        else
-            return next();
+        scorers[0]->advance(doc);
+        return findNext(scorers[0]);
     }
 
 };

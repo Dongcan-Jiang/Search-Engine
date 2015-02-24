@@ -46,7 +46,7 @@ public:
     int advance(int doc) {
         assert(docID < doc);
         for (size_t i = 0; i < scorers.size(); i++) {
-            if(scorers[i]->doc() < doc)
+            if (scorers[i]->doc() < doc)
                 scorers[i]->advance(doc);
         }
         int i = 0;
@@ -55,15 +55,13 @@ public:
             if (scorers[i]->doc() == DOC_EXHAUSTED) {
                 while((j > i+1) && (scorers[j]->doc() == DOC_EXHAUSTED))
                     j--;
-                shared_ptr<Scorer> tmp = scorers[i];
-                scorers[i] = scorers[j];
-                scorers[j] = tmp;
+                if (scorers[j]->doc() == DOC_EXHAUSTED)
+                    break;
+                swap(scorers[i],scorers[j]);
             }
             i++;
         }
-        if (scorers[0]->doc() == DOC_EXHAUSTED)
-            scorers.resize(0);
-        else if(scorers[i]->doc() == DOC_EXHAUSTED)
+        if(scorers[i]->doc() == DOC_EXHAUSTED)
                 scorers.resize(i);
         make_heap(scorers.begin(), scorers.end(), greaterDocID);
         return next();

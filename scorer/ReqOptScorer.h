@@ -17,16 +17,26 @@ public:
         return docScore;
     }
 
-    int next() {
-        docID = req->next();
+    int findOpt() {
+         if (docID == DOC_EXHAUSTED)
+            return docID;
         docScore = req->score();
-        if(opt->doc() <= docID){
-            if(opt->doc()==docID || opt->advance(docID)== docID)
+        if (opt->doc() <= docID) {
+            if (opt->doc() == docID || opt->advance(docID) == docID)
                 docScore += opt->score();
         }
         return docID ;
     }
 
+    int next() {
+        docID = req->next();
+        return findOpt();
+    }
+
+    int advance(int doc) {
+        docID = req->advance(doc);
+        return findOpt();
+    }
 };
 
 #endif // REQOPTSCORER_H_INCLUDED
