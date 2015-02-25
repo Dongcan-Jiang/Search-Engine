@@ -6,12 +6,12 @@
 
 class TermScorer: public PositionAbleScorer {
 public:
-    ifstream &in;
+    istream &in;
     int begin;
     int end;
     int offset;
     Skipper skipper;
-    TermScorer(ifstream &fin, int begin, int end, int df):in(fin), skipper(in, end) {
+    TermScorer(istream &fin, int begin, int end, int df):in(fin), skipper(in, end) {
         this->begin = begin;
         this->end = end;
         offset = -1;
@@ -43,7 +43,9 @@ public:
     vector<int> getPosition() {
         vector<int> pos;
         int offsetCopy = offset;
+        #ifdef _DEBUG__GETPOSITION_
         assert(offsetCopy >= begin && offsetCopy < end);
+        #endif
         int tf;
         in.seekg(offsetCopy+sizeof(int)).read((char*)&tf, sizeof(int));
         offsetCopy += sizeof(int)*2;

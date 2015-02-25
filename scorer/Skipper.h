@@ -6,7 +6,7 @@ public:
     int docID = -1;
     int poffset = -1;
     static const int DOC_EXHAUSTED = INT_MAX;
-    ifstream &in;
+    istream &in;
     int begin;
     int soffset = -1;
     int num;
@@ -15,7 +15,7 @@ public:
     int prepoffset = -1;
 
 
-    Skipper(ifstream &fin, int begin):in(fin) {
+    Skipper(istream &fin, int begin):in(fin) {
         this->begin = begin;
         in.seekg(begin).read((char*)&num, sizeof(int));
     }
