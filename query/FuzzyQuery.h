@@ -27,10 +27,11 @@ public:
         while (high >= low) {
             mid = (low+high)/2;
             s = is.iindexIfstream.getTerm(mid);
-            if (s.substr(0, fsize) > fuzzyTerm)
+            s = substr(0, fsize);
+            if (s > fuzzyTerm)
                 high = mid - 1;
             else {
-                if (s.substr(0, fsize) < fuzzyTerm)
+                if (s < fuzzyTerm)
                     low = mid + 1;
                 else {
                     lowerbound = mid-1;
