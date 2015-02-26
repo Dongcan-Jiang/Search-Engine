@@ -62,6 +62,8 @@ public:
         #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
         #endif
+        if (end == 0)
+            return docID = DOC_EXHAUSTED;
         while(skipper.doc() <= doc) {
             skipper.next();
         }
