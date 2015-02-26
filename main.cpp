@@ -1,14 +1,6 @@
 #include "test/test.h"
 
-
 int main(int argc, char*argv[]) {
-    /*
-    StandardAnalyzer test;
-    vector<Token> tokens;
-    tokens = test.toTokens("I've got 100MB space, which 102,400KB.");
-    for (size_t i = 0; i< tokens.size(); i++)
-        cout << tokens[i].toString()<< "+";
-    */
     const string HELPS[] = {
         "./main -i INDEX_DIR -d DATA_DIR        : build index",
         "./main -s INDEX_DIR -b QUERY_STR       : boolean search",
@@ -33,3 +25,47 @@ int main(int argc, char*argv[]) {
     //simpleTest();
     return 0;
 }
+
+/*
+bool fetchTermID(int &lowerbound, int &upperbound) {
+        int low = 0;
+        int high = 4;
+        int mid;
+        string s;
+        string fuzzyTerm = "ke";
+        vector<string> getTerm = {"absolute", "keep", "kei", "key", "zoo"};
+        int fsize = fuzzyTerm.size();
+        while (high >= low) {
+            mid = (low+high)/2;
+            s = getTerm[mid];
+            if (s.substr(0, fsize) > fuzzyTerm)
+                high = mid - 1;
+            else {
+                if (s.substr(0, fsize) < fuzzyTerm)
+                    low = mid + 1;
+                else {
+                    lowerbound = mid-1;
+                    upperbound = mid+1;
+                        while(lowerbound != -1 && getTerm[lowerbound].substr(0,fsize) == fuzzyTerm){
+                            lowerbound--;
+                        }
+                    lowerbound++;
+                        while(upperbound != 5 && getTerm[upperbound].substr(0,fsize) == fuzzyTerm) {
+                            upperbound++;
+                        }
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+int main() {
+    int lowerbound = -1;
+    int upperbound = -1;
+    fetchTermID(lowerbound, upperbound);
+    cout<<lowerbound<<" "<<upperbound;
+}
+*/
