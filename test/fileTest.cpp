@@ -67,8 +67,8 @@ void fileTest(int argc, char*argv[]) {
         shared_ptr<Query> query;
 
         //test
-        //if(string(argv[3])=="-t") {
-          //  query = make_shared<TermQuery>(s);
+        //if (string(argv[3])=="-t") {
+          //  query = make_shared<FuzzyQuery>(s);
         //}
         //test
 
@@ -81,7 +81,9 @@ void fileTest(int argc, char*argv[]) {
         }else {
             throw invalid_argument("Command Error.");
         }
+
         cout<<"Query: "<<query->toString()<<endl;
+
         fileTestSearchitem(INDEX_DIR, query);
     }else {
         throw invalid_argument("Command Error.");

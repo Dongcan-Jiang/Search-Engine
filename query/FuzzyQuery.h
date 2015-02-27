@@ -57,12 +57,17 @@ public:
 
     void filterDistance(IndexSearcher &is, int i, vector<shared_ptr<TermScorer>> &fts) {
         string s = is.iindexIfstream.getTerm(i);
-        if (s.size()-term.size() <= FUZZY_THRESHOLD && util::editDistance(s, term) <= FUZZY_THRESHOLD) {
+        //test
+        //cout<<s<<" ";
+        if (abs((int)s.size()-(int)term.size()) <= FUZZY_THRESHOLD && util::editDistance(s, term) <= FUZZY_THRESHOLD) {
             int begin = is.iindexIfstream.getPostinglistBegin(i);
             int end = is.iindexIfstream.getPostinglistEnd(i);
             int df = is.iindexIfstream.getDF(i);
             shared_ptr<TermScorer> ts = make_shared<TermScorer>(is.iindexIfstream.iindexPostinglist, begin, end, df);
             fts.push_back(ts);
+
+            //test
+            //cout<<"(choose:)"<<s<<" ";
         }
     }
 };

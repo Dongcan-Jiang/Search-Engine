@@ -25,19 +25,10 @@ using namespace std;
 #include "../query/QueryParser.h"
 #include "../query/PhraseQuery.h"
 #include "../query/FuzzyQuery.h"
-#include "../scorer/Scorer.h"
-#include "../scorer/PositionAbleScorer.h"
-#include "../scorer/TermScorer.h"
-#include "../scorer/FuzzyScorer.h"
-#include "../scorer/ConjunctionScorer.h"
-#include "../scorer/DisjunctionScorer.h"
-#include "../scorer/ReqExclScorer.h"
-#include "../scorer/ReqOptScorer.h"
-#include "../scorer/PhraseScorer.h"
 #include "../util/util.h"
 
 void simpleTest();
 
 void fileTest(int agrc, char*argv[]);
 
-#endif // TEST_H_INCLUDEDs
+#endif // TEST_H_INCLUDED

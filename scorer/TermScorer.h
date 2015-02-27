@@ -3,6 +3,7 @@
 
 #include "PositionAbleScorer.h"
 #include "Skipper.h"
+#include <set>
 
 class TermScorer: public PositionAbleScorer {
 public:
@@ -37,6 +38,10 @@ public:
                 in.seekg(offset).read((char*)&docID, sizeof(int));
             }
         }
+
+        //test
+        //cout<<docID<<" ";
+
         return docID;
     }
 
@@ -56,6 +61,21 @@ public:
             offsetCopy += sizeof(int);
         }
         return pos;
+    }
+
+    void getPostition(set<int> & pos, const vector<int> &preOffset) {
+        for(size_t i = 0; i < preOffset.size(); i++) {
+            int offsetCopy = preOffset[i];
+            int tf;
+            in.seekg(offsetCopy+sizeof(int)).read((char*)&tf, sizeof(int));
+            offsetCopy += sizeof(int)*2;
+            for(int i = 0; i < tf; i++) {
+                int position;
+                in.seekg(offsetCopy).read((char*)&position, sizeof(int));
+                pos.insert(position);
+                offsetCopy += sizeof(int);
+            }
+        }
     }
 
     int advance(int doc) {
