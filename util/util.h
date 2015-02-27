@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
+#include <algorithm>
 namespace util {
 
 
@@ -15,6 +15,7 @@ string joinPath(const string& path, const string &filename);
 bool isDir(const char *path);
 bool isFile(const char *path);
 string stem(const string & s);
+int editDistance(const string &s1, const string &s2);
 template <typename Func>
 void traverse(const string &path,const Func &func) {
     DIR *dir = opendir(path.c_str());

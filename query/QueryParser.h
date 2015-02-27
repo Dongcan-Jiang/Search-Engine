@@ -7,6 +7,7 @@
 #include "TermQuery.h"
 #include "BooleanQuery.h"
 #include "PhraseQuery.h"
+#include "FuzzyQuery.h"
 class QueryParser {
 public:
     vector<string> toBooleanTokens(const string& text) {
