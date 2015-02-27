@@ -10,6 +10,7 @@
 #include "FuzzyQuery.h"
 class QueryParser {
 public:
+    bool fuzzy = false;
     vector<string> toBooleanTokens(const string& text) {
         vector<string> tokens;
         size_t start = 0;
@@ -44,7 +45,10 @@ public:
                     throw runtime_error("Parser error:Symbol error");
                 if(tokens[i+1] != "("){
                     i++;
-                    querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
+                    if (!fuzzy)
+                        querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
+                    else
+                        querys.push(make_shared<FuzzyQuery>(analyzer->toTerm(tokens[i])));
                 }
                 continue;
             }
@@ -86,7 +90,10 @@ public:
                 continue;
             }
             symbols.push('s');
-            querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
+            if (!fuzzy)
+                querys.push(make_shared<TermQuery>(analyzer->toTerm(tokens[i])));
+            else
+                querys.push(make_shared<FuzzyQuery>(analyzer->toTerm(tokens[i])));
         }
         shared_ptr<BooleanQuery> q= make_shared<BooleanQuery>();
         while(!symbols.empty()){
@@ -115,8 +122,12 @@ public:
     shared_ptr<Query> getPhraseQuery(const string &text, shared_ptr<Analyzer> analyzer) {
             vector<shared_ptr<TermQuery>> v;
             vector<Token> tokens = analyzer->toTokens(text);
-            for(auto t : tokens)
-                v.push_back(make_shared<TermQuery>(t.term));
+            for(auto t : tokens) {
+                if (!fuzzy)
+                    v.push_back(make_shared<TermQuery>(t.term));
+                else
+                    v.push_back(make_shared<FuzzyQuery>(t.term));
+            }
             return make_shared<PhraseQuery>(v);
     }
 };

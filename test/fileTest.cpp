@@ -73,11 +73,25 @@ void fileTest(int argc, char*argv[]) {
         //test
 
         if(string(argv[3])=="-b") {
+            if(argc > 5 && string(argv[5])=="-f")
+                parser.fuzzy = true;
             query = parser.getBooleanQuery(s, make_shared<StandardAnalyzer>());
         }else if(string(argv[3])=="-p"){
             query = parser.getPhraseQuery(s,make_shared<StandardAnalyzer>());
-            if(argc > 5)
-                dynamic_pointer_cast<PhraseQuery>(query)->setDis(atoi(argv[5]));
+            if(argc == 6) {
+                if (string(argv[5])!="-f")
+                    dynamic_pointer_cast<PhraseQuery>(query)->setDis(atoi(argv[5]));
+                else
+                    parser.fuzzy = true;
+            }
+            if(argc == 7) {
+                if (string(argv[6]) != "-f")
+                    throw invalid_argument("Command Error.");
+                else {
+                    dynamic_pointer_cast<PhraseQuery>(query)->setDis(atoi(argv[5]));
+                    parser.fuzzy = true;
+                }
+            }
         }else {
             throw invalid_argument("Command Error.");
         }
