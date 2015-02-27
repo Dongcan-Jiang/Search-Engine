@@ -5,16 +5,10 @@
 
 class FuzzyScorer: public PositionAbleScorer {
 public:
-    istream &in;
-    int lowerbound;
-    int upperbound;
-    int offset;
-
-    FuzzyScorer(istream &fin, int lowerbound, int upperbound):in(fin){
-        this->lowerbound = lowerbound;
-        this->upperbound = upperbound;
+    vector<shared_ptr<TermScorer>> fts;
+    FuzzyScorer(const vector<shared_ptr<TermScorer>> & fts) {
+        this->fts = fts;
     }
-
 
 
 };
