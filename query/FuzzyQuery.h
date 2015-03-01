@@ -72,7 +72,7 @@ public:
     }
 
     string toString() {
-        return term;
+        return "[-f]"+term;
     }
 };
 
