@@ -1,7 +1,7 @@
 #include "fs.h"
 
 #include <cassert>
-
+#include <cstring>
 namespace fs {
 
 using namespace std;

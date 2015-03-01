@@ -1,6 +1,8 @@
 #ifndef SCORER_H_INCLUDED
 #define SCORER_H_INCLUDED
 
+#include <climits>
+
 class Scorer {
 public:
     static const int DOC_EXHAUSTED = INT_MAX;
