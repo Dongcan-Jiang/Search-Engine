@@ -1,4 +1,4 @@
-DAAT, Boolean Retrieval, Phrase Retrieval were implemented.
+DAAT, Boolean Retrieval, Phrase Retrieval，Skipper were implemented.
 
 Running Environment
 g++ >= 4.8

@@ -1,7 +1,7 @@
 #include "util.h"
 
 #include <cassert>
-
+#include <cstring>
 
 int stem(char * p, int i, int j);
 

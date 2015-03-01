@@ -12,7 +12,7 @@ int main(int argc, char*argv[]) {
     const string HELPS[] = {
         "./main -i INDEX_DIR -d DATA_DIR        : build index",
         "./main -s INDEX_DIR -b QUERY_STR       : boolean search",
-        "./main -s INDEX_DIR -b QUERY_STR [DIS] : phrase query within DIS",
+        "./main -s INDEX_DIR -p QUERY_STR [DIS] : phrase query within DIS",
         "./main -h                              : show help message"
 
     };
