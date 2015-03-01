@@ -8,12 +8,13 @@ class FuzzyScorer: public PositionAbleScorer {
 public:
     vector<shared_ptr<TermScorer>> scorers;
     vector<int> preOffset;
+    istream &pin;
 
     static bool greaterDocID (shared_ptr<Scorer> a, shared_ptr<Scorer> b) {
         return b->doc() < a->doc();
     };
 
-    FuzzyScorer(const vector<shared_ptr<TermScorer>> & fts) {
+    FuzzyScorer(istream &in, const vector<shared_ptr<TermScorer>> & fts):pin(in) {
         assert(fts.size() > 0);
         for(auto s : fts){
             if(s->next() < DOC_EXHAUSTED)
@@ -49,7 +50,7 @@ public:
 
     vector<int> getPosition() {
         set<int> pos;
-        scorers[0]->getPostition(pos, preOffset);
+        TermScorer::getPosition(pin, pos, preOffset);
         vector<int> vpos;
         for(auto p : pos)
             vpos.push_back(p);
@@ -60,6 +61,8 @@ public:
         #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
         #endif
+        if (scorers.size() == 0)
+            return DOC_EXHAUSTED;
         for (size_t i = 0; i < scorers.size(); i++) {
             if (scorers[i]->doc() < doc)
                 scorers[i]->advance(doc);

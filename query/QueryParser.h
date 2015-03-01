@@ -120,15 +120,15 @@ public:
     }
 
     shared_ptr<Query> getPhraseQuery(const string &text, shared_ptr<Analyzer> analyzer) {
-            vector<shared_ptr<TermQuery>> v;
-            vector<Token> tokens = analyzer->toTokens(text);
-            for(auto t : tokens) {
-                if (!fuzzy)
-                    v.push_back(make_shared<TermQuery>(t.term));
-                else
-                    v.push_back(make_shared<FuzzyQuery>(t.term));
-            }
-            return make_shared<PhraseQuery>(v);
+        vector<shared_ptr<TermQuery>> v;
+        vector<Token> tokens = analyzer->toTokens(text);
+        for (auto &t : tokens) {
+            if (!fuzzy)
+                v.push_back(make_shared<TermQuery>(t.term));
+            else
+                v.push_back(make_shared<FuzzyQuery>(t.term));
+        }
+        return make_shared<PhraseQuery>(v);
     }
 };
 

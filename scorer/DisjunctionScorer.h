@@ -47,6 +47,9 @@ public:
         #ifdef _DEBUG_ADVANCE_
         assert(docID < doc);
         #endif
+        //cout<<scorers.size()<<"+"<<docID<<"+"<<doc<<" ";
+        if (scorers.size() == 0)
+            return DOC_EXHAUSTED;
         for (size_t i = 0; i < scorers.size(); i++) {
             if (scorers[i]->doc() < doc)
                 scorers[i]->advance(doc);

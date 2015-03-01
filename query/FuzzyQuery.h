@@ -15,7 +15,7 @@ public:
         if (fts.size() == 0)
             return make_shared<TermScorer>(is.iindexIfstream.iindexPostinglist, 0, 0, 0);
         else
-            return make_shared<FuzzyScorer>(fts);
+            return make_shared<FuzzyScorer>(is.iindexIfstream.iindexPostinglist,fts);
     }
 
     bool fetchTerm(IndexSearcher &is, vector<shared_ptr<TermScorer>> &fts) {
@@ -69,6 +69,10 @@ public:
             //test
             //cout<<"(choose:)"<<s<<" ";
         }
+    }
+
+    string toString() {
+        return term;
     }
 };
 

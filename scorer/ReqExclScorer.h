@@ -25,6 +25,7 @@ public:
                 excl->advance(docID);
             }
         }while(excl->doc() == docID);
+        //cout<<"docID:"<<docID<<endl;
         return docID;
     }
 
